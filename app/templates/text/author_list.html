@@ -7,6 +7,7 @@
     {% for author in author_list %}
         <a class="uk-panel uk-panel-hover uk-panel-header" href="{{ author.get_absolute_url }}">
             <h3 class="uk-panel-title">{{ author.name }}</h3>
+            {{ author.about|truncatewords:20|linebreaks }}
         </a>
     {% endfor %}
 {% endblock %}

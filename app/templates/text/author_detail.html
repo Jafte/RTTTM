@@ -4,5 +4,5 @@
 
 {% block content-main %}
     <h1>{{ author.name }}</h1>
-    <p>{{ author.about }}</p>
+   {{ author.about|linebreaks }}
 {% endblock %}
