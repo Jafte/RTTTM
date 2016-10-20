@@ -1,0 +1,40 @@
+<!DOCTYPE html>{% load static %}
+<html>
+    <head>
+        <title>{% block title %}Прочти этот текст для меня{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'uikit/css/uikit.min.css' %}" />
+    </head>
+    <body>
+        <nav class="uk-navbar">
+            <div class="uk-container uk-container-center">
+                <a href="/" class="uk-navbar-brand">RTTTM</a>
+                <ul class="uk-navbar-nav">
+                    <li><a href="{% url "text-list" %}">Текст</a></li>
+                    <li><a href="{% url "sound-list" %}">Звук</a></li>
+                    <li class="uk-parent" data-uk-dropdown>
+                        <a href="#">Люди <i class="uk-icon-caret-down"></i></a>
+                        <div class="uk-dropdown uk-dropdown-navbar">
+                            <ul class="uk-nav uk-nav-navbar">
+                                <li><a href="{% url 'text-author-list' %}">за текстом</a></li>
+                                <li><a href="{% url 'sound-author-list' %}">за звуком</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="#">Оставить заявку на прочтение</a></li>
+                </ul>
+                <div class="uk-navbar-flip">
+                    <ul class="uk-navbar-nav">
+                        {% if user.is_authetificated %}
+                            <li><a href="{% url 'account_logout' %}">Выход</a></li>
+                        {% else %}
+                        <li><a href="{% url 'account_login' %}">Вход</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        {% block content %}{% endblock %}
+        <script src="{% static 'app/js/jquery-3.1.1.min.js' %}"></script>
+        <script src="{% static 'uikit/js/uikit.min.js' %}"></script>
+    </body>
+</html>

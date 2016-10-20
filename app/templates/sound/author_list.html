@@ -1,0 +1,12 @@
+{% extends 'sound/base.html' %}
+
+{% block title %}Список авторов аудиозаписей{% endblock %}
+
+{% block content-main %}
+    <h1>Список авторов аудиозаписей</h1>
+    {% for author in author_list %}
+        <a class="uk-panel uk-panel-hover uk-panel-header" href="{{ author.get_absolute_url }}">
+            <h3 class="uk-panel-title">{{ author }}</h3>
+        </a>
+    {% endfor %}
+{% endblock %}

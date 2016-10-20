@@ -1,0 +1,12 @@
+{% extends "user_profile/base.html" %}
+
+{% load account static %}
+
+{% block title %}Профиль пользователя: {% user_display user_data %}{% endblock %}
+
+{% block content-main %}
+    <h2>{% user_display user_data %}</h2>
+    {% if user_data.profile.about %}
+    <p>{{ user_data.profile.about }}</p>
+    {% endif %}
+{% endblock %}

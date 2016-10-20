@@ -1,0 +1,8 @@
+{% extends 'text/base.html' %}
+
+{% block title %}{{ text.name }}{% endblock %}
+
+{% block content-main %}
+    <h1>{{ text.name }}</h1>
+    {{ text.text }}
+{% endblock %}
