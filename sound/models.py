@@ -29,15 +29,15 @@ class Request(models.Model):
     text_source = models.TextField(verbose_name=_('text source'), blank=True)
     description = models.TextField(verbose_name=_('description'), blank=True)
     status = models.PositiveSmallIntegerField(_('status'), choices=STATUS_CHOICES, blank=True)
-    text = models.ForeignKey(to=Text, blank=True, null=True)
+    text = models.ForeignKey(to=Text, blank=True, null=True, related_name="requests")
 
     def __str__(self):
         return '%s request from %s' % (self.title, self.user)
 
 
 class Sound(models.Model):
-    text = models.ForeignKey(to=Text, verbose_name=_('text'))
-    author = models.ForeignKey(to=Author, verbose_name=_('author'), related_name="texts")
+    text = models.ForeignKey(to=Text, verbose_name=_('text'), related_name="sounds")
+    author = models.ForeignKey(to=Author, verbose_name=_('author'), related_name="sounds")
     file = models.FileField(verbose_name=_('file'), upload_to=upload_to)
     created = models.DateTimeField(verbose_name=_('created'), auto_now_add=True)
     modified = models.DateTimeField(verbose_name=_('modified'), auto_now=True)

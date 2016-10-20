@@ -3,6 +3,20 @@
 {% block title %}{{ text.name }}{% endblock %}
 
 {% block content-main %}
-    <h1>{{ text.name }}</h1>
-    {{ text.text|linebreaks }}
+    <div class="uk-panel uk-panel-box uk-float-right uk-margin" style="width: 350px;">
+        <h4>Известные озвучки</h4>
+        {% for sound in text.sounds.all %}
+            <p><a href="{{ sound.get_absolute_url }}">
+                читает {{ sound.author }}
+            </a></p>
+        {% empty %}
+            <p>записей не найдено</p>
+        {% endfor %}
+    </div>
+    <article class="uk-article">
+        <h1 class="uk-article-title">{{ text.name }}</h1>
+        <p class="uk-article-meta">Автор: <a href="{{ text.author.get_absolute_url }}">{{ text.author }}</a></p>
+        <hr class="uk-article-divider">
+        {{ text.text|linebreaks }}
+    </article>
 {% endblock %}
