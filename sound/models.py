@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from uuid_upload_path import upload_to
+from django.urls import reverse
 from text.models import Text
 
 STATUS_CHOICES = (
@@ -21,6 +22,9 @@ class Author(models.Model):
     def __str__(self):
         return '%s' % self.name
 
+    def get_absolute_url(self):
+        return reverse('sound-author-detail', kwargs={'pk': self.pk})
+
 
 class Request(models.Model):
     user = models.ForeignKey(to=User)
@@ -34,6 +38,9 @@ class Request(models.Model):
     def __str__(self):
         return '%s request from %s' % (self.title, self.user)
 
+    def get_absolute_url(self):
+        return reverse('request-detail', kwargs={'pk': self.pk})
+
 
 class Sound(models.Model):
     text = models.ForeignKey(to=Text, verbose_name=_('text'), related_name="sounds")
@@ -45,3 +52,6 @@ class Sound(models.Model):
 
     def __str__(self):
         return '%s sounded by %s' % (self.text, self.author)
+
+    def get_absolute_url(self):
+        return reverse('sound-detail', kwargs={'pk': self.pk})
