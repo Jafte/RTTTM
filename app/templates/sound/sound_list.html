@@ -6,8 +6,8 @@
     <h1>Список аудиозаписей</h1>
     {% for sound in sound_list %}
         <a class="uk-panel uk-panel-hover uk-panel-header" href="{{ sound.get_absolute_url }}">
-            <h3 class="uk-panel-title">{{ sound.text.title }}</h3>
-            <p>{{ text.author }}</p>
+            <h3 class="uk-panel-title">{{ sound.text.name }}</h3>
+            <p>{{ sound.author }}</p>
         </a>
     {% endfor %}
 {% endblock %}
