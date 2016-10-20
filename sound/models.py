@@ -18,6 +18,9 @@ class Author(models.Model):
     about = models.TextField(verbose_name=_('about'), blank=True)
     user = models.ForeignKey(to=User, null=True, blank=True)
 
+    def __str__(self):
+        return '%s' % self.name
+
 
 class Request(models.Model):
     user = models.ForeignKey(to=User)
@@ -28,6 +31,9 @@ class Request(models.Model):
     status = models.PositiveSmallIntegerField(_('status'), choices=STATUS_CHOICES, blank=True)
     text = models.ForeignKey(to=Text, blank=True, null=True)
 
+    def __str__(self):
+        return '%s request from %s' % (self.title, self.user)
+
 
 class Sound(models.Model):
     text = models.ForeignKey(to=Text, verbose_name=_('text'))
@@ -37,3 +43,5 @@ class Sound(models.Model):
     modified = models.DateTimeField(verbose_name=_('modified'), auto_now=True)
     request = models.ForeignKey(to=Request, blank=True, null=True)
 
+    def __str__(self):
+        return '%s sounded by %s' % (self.text, self.author)
