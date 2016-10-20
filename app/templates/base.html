@@ -24,7 +24,7 @@
                 </ul>
                 <div class="uk-navbar-flip">
                     <ul class="uk-navbar-nav">
-                        {% if user.is_authetificated %}
+                        {% if user.is_authenticated %}
                             <li><a href="{% url 'account_logout' %}">Выход</a></li>
                         {% else %}
                         <li><a href="{% url 'account_login' %}">Вход</a></li>
