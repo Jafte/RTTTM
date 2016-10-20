@@ -1,1 +1,25 @@
-sound_detail.html
+{% extends 'sound/base.html' %}
+
+{% block title %}Список аудиозаписей{% endblock %}
+
+{% block content-main %}
+    <article class="uk-article">
+        <h1 class="uk-article-title">{{ sound.text.name }}</h1>
+        <p class="uk-article-meta">
+            Озвучка: <a href="{{ sound.author.get_absolute_url }}">{{ sound.author }}</a>,
+            автор текста: <a href="{{ sound.text.author.get_absolute_url }}">{{ sound.text.author }}</a>
+        </p>
+        <hr class="uk-article-divider">
+        {{ sound.file }}
+    </article>
+    <h4>Другие варианты озвучки</h4>
+    {% for other_sound in sound.get_other_sounds %}
+        <p>
+            <a href="{{ other_sound.get_absolute_url }}">
+            читает {{ other_sound.author }}
+            </a>
+        </p>
+    {% empty %}
+        <p>записей не найдено</p>
+    {% endfor %}
+{% endblock %}

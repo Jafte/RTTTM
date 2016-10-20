@@ -55,3 +55,6 @@ class Sound(models.Model):
 
     def get_absolute_url(self):
         return reverse('sound-detail', kwargs={'pk': self.pk})
+
+    def get_other_sounds(self):
+        return Sound.objects.filter(text=self.text).exclude(pk=self.pk)

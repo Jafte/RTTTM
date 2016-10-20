@@ -4,5 +4,13 @@
 
 {% block content-main %}
     <h1>{{ author.name }}</h1>
-   {{ author.about|linebreaks }}
+    {{ author.about|linebreaks }}
+    <h2>Произведения:</h2>
+    {% for text in author.texts.all %}
+        <p>
+            <a href="{{ text.get_absolute_url }}">{{ text.name }}</a>
+        </p>
+    {% empty %}
+        <p>Произведений автора не найдено</p>
+    {% endfor %}
 {% endblock %}

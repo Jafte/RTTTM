@@ -1,1 +1,16 @@
-author_detail.html
+{% extends 'sound/base.html' %}
+
+{% block title %}{{ author.name }}{% endblock %}
+
+{% block content-main %}
+    <h1>{{ author.name }}</h1>
+    {{ author.about|linebreaks }}
+    <h2>Озвучки:</h2>
+    {% for sound in author.sounds.all %}
+        <p>
+            <a href="{{ sound.get_absolute_url }}">{{ sound.text.name }}</a>
+        </p>
+    {% empty %}
+        <p>Записей автора не найдено</p>
+    {% endfor %}
+{% endblock %}

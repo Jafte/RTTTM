@@ -1,1 +1,11 @@
-request_detail.html
+{% extends 'sound/base.html' %}
+
+{% block title %}{{ request_object.title }}{% endblock %}
+
+{% block content-main %}
+    <article class="uk-article">
+        <h1 class="uk-article-title">{{ request_object.title }}</h1>
+        <hr class="uk-article-divider">
+        {{ request_object.text|linebreaks }}
+    </article>
+{% endblock %}

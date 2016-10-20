@@ -1,1 +1,12 @@
-request_list.html
+{% extends 'sound/base.html' %}
+
+{% block title %}Список запросов{% endblock %}
+
+{% block content-main %}
+    <h1>Список запросов</h1>
+    {% for req in request_list %}
+        <a class="uk-panel uk-panel-hover uk-panel-header" href="{{ req.get_absolute_url }}">
+            <h3 class="uk-panel-title">{{ req.title }}</h3>
+        </a>
+    {% endfor %}
+{% endblock %}
