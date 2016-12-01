@@ -2,7 +2,7 @@
 
 {% block title %}Список аудиозаписей{% endblock %}
 
-{% block content-main %}
+{% block content %}
     <h1>Список аудиозаписей</h1>
     {% for sound in sound_list %}
         <a class="uk-panel uk-panel-hover uk-panel-header" href="{{ sound.get_absolute_url }}">

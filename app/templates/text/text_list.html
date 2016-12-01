@@ -2,7 +2,7 @@
 
 {% block title %}Список текстов{% endblock %}
 
-{% block content-main %}
+{% block content %}
     <h1>Список текстов</h1>
     {% for text in text_list %}
         <a class="uk-panel uk-panel-hover uk-panel-header" href="{{ text.get_absolute_url }}">

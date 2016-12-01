@@ -1,12 +1,25 @@
 {% extends 'sound/base.html' %}
 
+{% load account %}
+
 {% block title %}Список запросов{% endblock %}
 
-{% block content-main %}
+{% block content %}
     <h1>Список запросов</h1>
+    <p>
+        <a class="uk-button uk-button-primary" href="{% url 'request-create' %}">новая заявка</a>
+    </p>
+    <div class="uk-grid">
     {% for req in request_list %}
-        <a class="uk-panel uk-panel-hover uk-panel-header" href="{{ req.get_absolute_url }}">
-            <h3 class="uk-panel-title">{{ req.title }}</h3>
-        </a>
+        <div class="uk-width-1-1">
+            <a class="uk-panel uk-panel-hover uk-panel-header" href="{{ req.get_absolute_url }}">
+                <h3 class="uk-panel-title">{{ req.title }}</h3>
+                <p>
+                    запрос {% user_display req.user %},
+
+                </p>
+            </a>
+        </div>
     {% endfor %}
+    </div>
 {% endblock %}

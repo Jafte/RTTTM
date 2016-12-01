@@ -2,7 +2,7 @@
 
 {% block title %}Список авторов{% endblock %}
 
-{% block content-main %}
+{% block content %}
     <h1>Список авторов</h1>
     {% for author in author_list %}
         <a class="uk-panel uk-panel-hover uk-panel-header" href="{{ author.get_absolute_url }}">

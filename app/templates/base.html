@@ -1,4 +1,4 @@
-<!DOCTYPE html>{% load static %}
+<!DOCTYPE html>{% load static account %}
 <html>
     <head>
         <title>{% block title %}Прочти этот текст для меня{% endblock %}</title>
@@ -9,8 +9,8 @@
             <div class="uk-container uk-container-center">
                 <a href="/" class="uk-navbar-brand">RTTTM</a>
                 <ul class="uk-navbar-nav">
-                    <li><a href="{% url "text-list" %}">Текст</a></li>
-                    <li><a href="{% url "sound-list" %}">Звук</a></li>
+                    <li><a href="{% url "text-list" %}">Тексты</a></li>
+                    <li><a href="{% url "sound-list" %}">Озвучка</a></li>
                     <li class="uk-parent" data-uk-dropdown>
                         <a href="#">Люди <i class="uk-icon-caret-down"></i></a>
                         <div class="uk-dropdown uk-dropdown-navbar">
@@ -20,20 +20,22 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a href="{% url 'request-create' %}">Оставить заявку на прочтение</a></li>
+                    <li><a href="{% url 'request-list' %}">Заявки</a></li>
                 </ul>
                 <div class="uk-navbar-flip">
                     <ul class="uk-navbar-nav">
                         {% if user.is_authenticated %}
-                            <li><a href="{% url 'account_logout' %}">Выход</a></li>
+                        <li><a href="{{ user.profile.get_absolute_url }}">{% user_display user %}</a></li>
+                        <li><a href="{% url 'account_logout' %}">Выход</a></li>
                         {% else %}
                         <li><a href="{% url 'account_login' %}">Вход</a></li>
+                        <li><a href="{% url 'account_signup' %}">Регистрация</a></li>
                         {% endif %}
                     </ul>
                 </div>
             </div>
         </nav>
-        {% block content %}{% endblock %}
+        {% block content-main %}{% endblock %}
         <script src="{% static 'app/js/jquery-3.1.1.min.js' %}"></script>
         <script src="{% static 'uikit/js/uikit.min.js' %}"></script>
     </body>

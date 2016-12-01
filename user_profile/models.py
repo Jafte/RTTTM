@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 from django.db.models.signals import post_save
+from sound.models import Author
 
 
 class Profile(models.Model):
@@ -11,6 +12,7 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, unique=True, verbose_name=_('user'), related_name='profile') 
     about = models.TextField(_('about me'), blank=True)
+    is_voice_artist = models.BooleanField(_('is voice artist'), default=False)
 
     def get_absolute_url(self):
         return reverse('user-profile-detail', kwargs={'username': self.user.username})

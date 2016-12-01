@@ -7,3 +7,4 @@ pytz
 django-cleanup>=0.4.2
 django-uuid-upload-path
 django-activity-stream>=0.6.3
+django_crispy_forms>=1.6.1

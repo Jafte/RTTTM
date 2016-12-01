@@ -27,19 +27,34 @@ class Author(models.Model):
 
 
 class Request(models.Model):
-    user = models.ForeignKey(to=User)
+    user = models.ForeignKey(to=User, related_name="created_requests")
     title = models.CharField(verbose_name=_('title'), max_length=200)
     url_to_source = models.CharField(verbose_name=_('url to source'), blank=True, max_length=200)
     text_source = models.TextField(verbose_name=_('text source'), blank=True)
     description = models.TextField(verbose_name=_('description'), blank=True)
     status = models.PositiveSmallIntegerField(_('status'), choices=STATUS_CHOICES, blank=True)
     text = models.ForeignKey(to=Text, blank=True, null=True, related_name="requests")
+    created = models.DateTimeField(verbose_name=_('created'), auto_now_add=True)
+    taken_by_users = models.ManyToManyField(to=User, through='ArtistRequest', related_name="taken_requests")
 
     def __str__(self):
         return '%s request from %s' % (self.title, self.user)
 
     def get_absolute_url(self):
         return reverse('request-detail', kwargs={'pk': self.pk})
+
+
+class ArtistRequest(models.Model):
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    request = models.ForeignKey(to=Request, on_delete=models.CASCADE)
+    created = models.DateTimeField(verbose_name=_('created'), auto_now_add=True)
+    status = models.PositiveSmallIntegerField(_('status'), choices=STATUS_CHOICES, blank=True)
+
+    def __str__(self):
+        return '%s request taken by %s' % (self.title.request, self.user)
+
+    def get_absolute_url(self):
+        return reverse('request-detail', kwargs={'pk': self.request.pk})
 
 
 class Sound(models.Model):

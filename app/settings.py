@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'mailer',
     'django_cleanup',
+    'crispy_forms',
 
     'text',
     'sound',
@@ -132,7 +133,7 @@ ACCOUNT_ADAPTER = 'user_profile.users_adapter.UserAdapter'
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-Ru'
 
 TIME_ZONE = 'UTC'
 
@@ -149,6 +150,10 @@ ACCOUNT_USER_DISPLAY = "user_profile.helper.get_full_name_or_username"
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+
+LOGIN_URL = '/login/'
+
+CRISPY_TEMPLATE_PACK = "uikit"
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'app/static'),

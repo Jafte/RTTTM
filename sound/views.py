@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from sound.models import Sound, Author, Request
+from sound.forms import RequestForm
 
 
 class AuthorList(ListView):
@@ -42,7 +43,7 @@ class RequestDetail(DetailView):
 class RequestCreate(LoginRequiredMixin, CreateView):
     model = Request
     template_name = "sound/request_form.html"
-    fields = ['title', 'description', 'url_to_source', 'text_source', 'description']
+    form_class = RequestForm
 
     def form_valid(self, form):
         user = self.request.user
