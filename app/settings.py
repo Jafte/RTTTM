@@ -25,6 +25,8 @@ SECRET_KEY = 'e20pl____ik#rg@tfq3k+dky_u7f+zvb(w*a+1ixxkce)y+ws*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+THUMBNAIL_DEBUG = DEBUG
+
 ALLOWED_HOSTS = []
 
 
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'debug_toolbar',
     'mailer',
+    'easy_thumbnails',
     'django_cleanup',
     'crispy_forms',
 

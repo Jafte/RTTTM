@@ -3,6 +3,7 @@
     <head>
         <title>{% block title %}Почитаешь мне?{% endblock %}</title>
         <link rel="stylesheet" href="{% static 'uikit/css/uikit.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'app/css/style.css' %}" />
     </head>
     <body>
         <nav class="uk-navbar">
@@ -41,6 +42,9 @@
         {% block content-main %}{% endblock %}
         <script src="{% static 'app/js/jquery-3.1.1.min.js' %}"></script>
         <script src="{% static 'uikit/js/uikit.min.js' %}"></script>
+        <script src="{% static 'app/js/audiojs/audio.min.js' %}"></script>
+        <script>
+        </script>
         {% block extra_body %}{% endblock %}
     </body>
 </html>

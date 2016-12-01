@@ -10,7 +10,7 @@
             автор текста: <a href="{{ sound.text.author.get_absolute_url }}">{{ sound.text.author }}</a>
         </p>
         <hr class="uk-article-divider">
-        {{ sound.file }}
+        <audio class="uk-width-1-2" src="{{ sound.file.url }}" preload="none" controls></audio>
     </article>
     <h4>Другие варианты озвучки</h4>
     {% for other_sound in sound.get_other_sounds %}

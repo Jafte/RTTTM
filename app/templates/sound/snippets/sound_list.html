@@ -1,12 +1,22 @@
+{% load thumbnail %}
 <div class="sound-item">
-    <a href="{{ sound.get_absolute_url }}">
-        <h3>{{ sound.text.name }}</h3>
-    </a>
-    <p>
-        написал <a href="{{ sound.text.author.get_absolute_url }}">{{ sound.text.author }}</a>,
-        читает <a href="{{ sound.author.get_absolute_url }}">{{ sound.author }}</a>
-    </p>
-    {% if mode != "short" and sound.description %}
-    <p>{{ sound.description }}</p>
-    {% endif %}
+    <div class="uk-grid uk-grid-small">
+        <div class="uk-width-1-6 uk-text-center">
+            {% thumbnail sound.author.photo 75x75 crop as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="uk-border-circle">
+        </div>
+        <div class="uk-width-5-6">
+            <a class="uk-h3" href="{{ sound.get_absolute_url }}">{{ sound.text.name }}</a>
+            <div class="sound-info">
+                написал <a href="{{ sound.text.author.get_absolute_url }}">{{ sound.text.author }}</a>,
+                читает <a href="{{ sound.author.get_absolute_url }}">{{ sound.author }}</a>
+            </div>
+            {% if mode != "short" and sound.description %}
+            <p>{{ sound.description }}</p>
+            {% endif %}
+            <div class="sound-file">
+                <audio class="uk-width-1-1" src="{{ sound.file.url }}" preload="none" controls></audio>
+            </div>
+        </div>
+    </div>
 </div>

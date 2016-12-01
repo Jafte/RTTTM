@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content-main %}
-<div class="uk-container uk-container-center uk-margin-top">
+<div class="uk-container uk-container-center uk-margin-large-top">
     <div class="uk-grid">
         <div class="uk-width-1-2">
-            <h2>Последние прочитанное</h2>
+            <h2>
+                <i class="uk-icon-microphone uk-text-success"></i>
+                Последние прочитанное
+            </h2>
+            <hr class="uk-">
             <div class="sound-list">
                 {% for sound in last_sounds %}
                     {% include "sound/snippets/sound_list.html" with sound=sound mode="short" %}
@@ -15,6 +19,7 @@
         </div>
         <div class="uk-width-1-2">
             <h2>Новые голоса</h2>
+            <hr class="uk-text-primary">
         </div>
     </div>
 </div>
