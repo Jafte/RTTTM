@@ -9,8 +9,8 @@
             <div class="uk-container uk-container-center">
                 <a href="/" class="uk-navbar-brand">RTTTM</a>
                 <ul class="uk-navbar-nav">
-                    <li><a href="{% url "text-list" %}">Тексты</a></li>
-                    <li><a href="{% url "sound-list" %}">Озвучка</a></li>
+                    <li><a href="{% url 'text-list' %}">Тексты</a></li>
+                    <li><a href="{% url 'sound-list' %}">Озвучка</a></li>
                     <li class="uk-parent" data-uk-dropdown>
                         <a href="#">Люди <i class="uk-icon-caret-down"></i></a>
                         <div class="uk-dropdown uk-dropdown-navbar">
@@ -38,5 +38,6 @@
         {% block content-main %}{% endblock %}
         <script src="{% static 'app/js/jquery-3.1.1.min.js' %}"></script>
         <script src="{% static 'uikit/js/uikit.min.js' %}"></script>
+        {% block extra_body %}{% endblock %}
     </body>
 </html>
