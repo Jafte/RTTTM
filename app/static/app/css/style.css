@@ -1,3 +1,7 @@
 audio {
     height: 30px;
 }
+
+.user-no-photo {
+    font-size: 75px;
+}
