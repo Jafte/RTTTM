@@ -1,0 +1,14 @@
+{% load thumbnail %}
+<div class="voice-item uk-text-center">
+    <a href="{{ author.get_absolute_url }}">
+        {% if author.photo %}
+        {% thumbnail author.photo 175x175 crop as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="uk-border-circle">
+        {% else %}
+        <span class="uk-icon-large uk-icon-user user-no-photo-big"></span>
+        {% endif %}
+        <div class="uk-h3">
+            {{ author }}
+        </div>
+    </a>
+</div>

@@ -5,10 +5,10 @@
     <div class="uk-grid">
         <div class="uk-width-1-2">
             <h2>
-                <i class="uk-icon-microphone uk-text-success"></i>
+                <i class="uk-icon-volume-up color-primary"></i>
                 Последнее прочитанное
             </h2>
-            <hr class="uk-">
+            <hr class="color-hr">
             <div class="sound-list">
                 {% for sound in last_sounds %}
                     {% include "sound/snippets/sound_list.html" with sound=sound mode="short" %}
@@ -18,8 +18,22 @@
             </div>
         </div>
         <div class="uk-width-1-2">
-            <h2>Новые голоса</h2>
-            <hr class="uk-text-primary">
+            <h2>
+                <i class="uk-icon-microphone color-primary"></i>
+                Новые голоса
+            </h2>
+            <hr class="color-hr">
+            <div class="voice-list">
+                <div class="uk-grid uk-grid-small">
+                {% for voice in last_voices %}
+                    <div class="uk-width-1-2">
+                    {% include "sound/snippets/author_list_short.html" with author=voice %}
+                    </div>
+                {% empty %}
+                    <p>Ни одного нового голоса, господа :( как же так...</p>
+                {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 </div>

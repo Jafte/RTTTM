@@ -3,11 +3,13 @@
 {% block title %}Список аудиозаписей{% endblock %}
 
 {% block content %}
-    <h1>Список аудиозаписей</h1>
+    <h1>
+        <i class="uk-icon-volume-up uk-text-success"></i>
+        Список аудиозаписей
+    </h1>
     {% for sound in sound_list %}
-        <a class="uk-panel uk-panel-hover uk-panel-header" href="{{ sound.get_absolute_url }}">
-            <h3 class="uk-panel-title">{{ sound.text.name }}</h3>
-            <p>{{ sound.author }}</p>
-        </a>
+        {% include "sound/snippets/sound_list.html" with sound=sound mode="full" %}
+    {% empty %}
+        <p>Ни одной новой записи, господа :( как же так...</p>
     {% endfor %}
 {% endblock %}

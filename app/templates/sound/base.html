@@ -2,6 +2,13 @@
 
 {% block content-main %}
     <div class="uk-container uk-container-center uk-margin-top">
-        {% block content %}{% endblock %}
+        <div class="uk-grid">
+            <div class="uk-width-3-4">
+                {% block content %}{% endblock %}
+            </div>
+            <div class="uk-width-1-4">
+                {% block rightbar %}{% endblock %}
+            </div>
+        </div>
     </div>
 {% endblock %}
