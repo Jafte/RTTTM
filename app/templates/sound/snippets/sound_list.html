@@ -1,0 +1,12 @@
+<div class="sound-item">
+    <a href="{{ sound.get_absolute_url }}">
+        <h3>{{ sound.text.name }}</h3>
+    </a>
+    <p>
+        написал <a href="{{ sound.text.author.get_absolute_url }}">{{ sound.text.author }}</a>,
+        читает <a href="{{ sound.author.get_absolute_url }}">{{ sound.author }}</a>
+    </p>
+    {% if mode != "short" and sound.description %}
+    <p>{{ sound.description }}</p>
+    {% endif %}
+</div>

@@ -37,6 +37,9 @@ class Request(models.Model):
     created = models.DateTimeField(verbose_name=_('created'), auto_now_add=True)
     taken_by_users = models.ManyToManyField(to=User, through='ArtistRequest', related_name="taken_requests")
 
+    class Meta:
+        ordering = ['-created']
+
     def __str__(self):
         return '%s request from %s' % (self.title, self.user)
 
@@ -49,6 +52,9 @@ class ArtistRequest(models.Model):
     request = models.ForeignKey(to=Request, on_delete=models.CASCADE)
     created = models.DateTimeField(verbose_name=_('created'), auto_now_add=True)
     status = models.PositiveSmallIntegerField(_('status'), choices=STATUS_CHOICES, blank=True)
+
+    class Meta:
+        ordering = ['-created']
 
     def __str__(self):
         return '%s request taken by %s' % (self.title.request, self.user)
@@ -64,6 +70,10 @@ class Sound(models.Model):
     created = models.DateTimeField(verbose_name=_('created'), auto_now_add=True)
     modified = models.DateTimeField(verbose_name=_('modified'), auto_now=True)
     request = models.ForeignKey(to=Request, blank=True, null=True)
+    description = models.TextField(verbose_name=_('description'), blank=True)
+
+    class Meta:
+        ordering = ['-created']
 
     def __str__(self):
         return '%s sounded by %s' % (self.text, self.author)

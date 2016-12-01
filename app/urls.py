@@ -17,6 +17,7 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic import TemplateView
+from app.views import IndexPage
 
 urlpatterns = [
     url(r'^', include('allauth.urls')),
@@ -24,7 +25,8 @@ urlpatterns = [
     url(r'^sound/', include('sound.urls')),
     url(r'^user/', include('user_profile.urls')),
 
-    url(r'^$', TemplateView.as_view(template_name="app/index.html"), name='index'),
+    url(r'^$', IndexPage.as_view(), name='index'),
+    url(r'^how/$', TemplateView.as_view(template_name="app/how.html"), name='how'),
 
     url(r'^admin/', admin.site.urls),
 ]

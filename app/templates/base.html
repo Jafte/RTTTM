@@ -1,26 +1,29 @@
 <!DOCTYPE html>{% load static account %}
 <html>
     <head>
-        <title>{% block title %}Прочти этот текст для меня{% endblock %}</title>
+        <title>{% block title %}Почитаешь мне?{% endblock %}</title>
         <link rel="stylesheet" href="{% static 'uikit/css/uikit.min.css' %}" />
     </head>
     <body>
         <nav class="uk-navbar">
             <div class="uk-container uk-container-center">
-                <a href="/" class="uk-navbar-brand">RTTTM</a>
+                <a href="{% url 'index' %}" class="uk-navbar-brand">CYR4M</a>
                 <ul class="uk-navbar-nav">
-                    <li><a href="{% url 'text-list' %}">Тексты</a></li>
-                    <li><a href="{% url 'sound-list' %}">Озвучка</a></li>
+                    <li><a href="{% url 'request-create' %}">Почитаешь мне?</a></li>
+                    <li><a href="{% url 'sound-list' %}">Уже читают</a></li>
+                    <li><a href="{% url 'request-list' %}">Ждут, чтобы почитали</a></li>
+
                     <li class="uk-parent" data-uk-dropdown>
-                        <a href="#">Люди <i class="uk-icon-caret-down"></i></a>
+                        <a href="#">Остальное <i class="uk-icon-caret-down"></i></a>
                         <div class="uk-dropdown uk-dropdown-navbar">
                             <ul class="uk-nav uk-nav-navbar">
-                                <li><a href="{% url 'text-author-list' %}">за текстом</a></li>
-                                <li><a href="{% url 'sound-author-list' %}">за звуком</a></li>
+                                <li><a href="{% url 'text-author-list' %}">Люди, которые пишут</a></li>
+                                <li><a href="{% url 'sound-author-list' %}">Люди, которые читают</a></li>
+                                <li><a href="{% url 'text-list' %}">Коллекция прочитанных произведений</a></li>
                             </ul>
                         </div>
                     </li>
-                    <li><a href="{% url 'request-list' %}">Заявки</a></li>
+                    <li><a href="{% url 'how' %}">Как это работает?</a></li>
                 </ul>
                 <div class="uk-navbar-flip">
                     <ul class="uk-navbar-nav">
