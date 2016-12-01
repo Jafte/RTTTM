@@ -1,7 +1,12 @@
+.sound-item {
+    margin-bottom: 15px;
+}
+
 audio {
     height: 30px;
 }
 
 .user-no-photo {
-    font-size: 75px;
+    font-size: 70px;
+    color: #eee;
 }
