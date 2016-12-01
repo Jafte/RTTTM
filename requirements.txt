@@ -10,4 +10,3 @@ django-activity-stream>=0.6.3
 django_crispy_forms>=1.6.1
 easy-thumbnails>=2.3
 Pillow>=3.4.2
-django-sslify>=0.2.7

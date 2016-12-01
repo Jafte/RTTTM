@@ -60,8 +60,6 @@ SITE_ID = 1
 EMAIL_BACKEND = "mailer.backend.DbBackend"
 
 MIDDLEWARE = [
-    'sslify.middleware.SSLifyMiddleware',
-
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
