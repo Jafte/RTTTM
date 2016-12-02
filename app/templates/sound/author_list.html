@@ -1,12 +1,18 @@
 {% extends 'sound/base.html' %}
 
-{% block title %}Список авторов аудиозаписей{% endblock %}
+{% block title %}Люди, которые читают{% endblock %}
 
-{% block content %}
-    <h1>Список авторов аудиозаписей</h1>
+{% block content-container %}
+    <h1>
+        <i class="uk-icon-microphone color-primary"></i>
+         Наши голоса
+    </h1>
+    <hr class="color-hr">
+    <div class="uk-grid uk-grid-small">
     {% for author in author_list %}
-        <a class="uk-panel uk-panel-hover uk-panel-header" href="{{ author.get_absolute_url }}">
-            <h3 class="uk-panel-title">{{ author }}</h3>
-        </a>
+        <div class="uk-width-1-4">
+        {% include "sound/snippets/author_list_short.html" with author=author %}
+        </div>
     {% endfor %}
+    </div>
 {% endblock %}

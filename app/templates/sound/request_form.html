@@ -4,22 +4,18 @@
 
 {% block title %}Новый запрос{% endblock %}
 
-{% block content %}
-<h1>Новый запрос на озвучку</h1>
-<div class="uk-grid">
-    <div class="uk-width-3-5">
-        <form class="uk-form uk-form-horizontal" id="signup_form" method="post" action="{% url 'request-create' %}">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <div class="uk-form-row">
-                <div class="uk-form-controls">
-                    <button class="uk-button uk-button-success" type="submit">Отправить</button>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="uk-width-2-5">
+{% block li_request_create %} class="uk-active" {% endblock %}
 
-    </div>
-</div>
+{% block content %}
+    <h1>Прочтите для меня, пожалуйста</h1>
+    <hr class="color-hr">
+    <form class="uk-form uk-form-horizontal" id="signup_form" method="post" action="{% url 'request-create' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="uk-form-row">
+            <div class="uk-form-controls">
+                <button class="uk-button uk-button-success" type="submit">Отправить</button>
+            </div>
+        </div>
+    </form>
 {% endblock %}

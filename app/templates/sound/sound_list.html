@@ -1,12 +1,15 @@
 {% extends 'sound/base.html' %}
 
-{% block title %}Список аудиозаписей{% endblock %}
+{% block title %}Послушать{% endblock %}
+
+{% block li_sound_list %} class="uk-active" {% endblock %}
 
 {% block content %}
     <h1>
         <i class="uk-icon-volume-up uk-text-success"></i>
-        Список аудиозаписей
+        Послушать других
     </h1>
+    <hr class="color-hr">
     {% for sound in sound_list %}
         {% include "sound/snippets/sound_list.html" with sound=sound mode="full" %}
     {% empty %}

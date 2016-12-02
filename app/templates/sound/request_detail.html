@@ -2,7 +2,9 @@
 
 {% block title %}{{ request_object.title }}{% endblock %}
 
-{% block content %}
+{% block li_request_list %} class="uk-active" {% endblock %}
+
+{% block content-container %}
     <article class="uk-article">
         <h1 class="uk-article-title">{{ request_object.title }}</h1>
         <hr class="uk-article-divider">

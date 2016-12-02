@@ -8,43 +8,52 @@
     <body>
         <nav class="uk-navbar">
             <div class="uk-container uk-container-center">
-                <a href="{% url 'index' %}" class="uk-navbar-brand">CYR4M</a>
+                <a href="{% url 'index' %}" class="uk-navbar-brand">
+                    <img src="{% static 'app/img/logo.png' %}" width="145" height="74" alt="can your read for me?">
+                </a>
                 <ul class="uk-navbar-nav">
-                    <li><a href="{% url 'request-create' %}">Почитаешь мне?</a></li>
-                    <li><a href="{% url 'sound-list' %}">Уже читают</a></li>
-                    <li><a href="{% url 'request-list' %}">Ждут, чтобы почитали</a></li>
-
-                    <li class="uk-parent" data-uk-dropdown>
-                        <a href="#">Остальное <i class="uk-icon-caret-down"></i></a>
-                        <div class="uk-dropdown uk-dropdown-navbar">
-                            <ul class="uk-nav uk-nav-navbar">
-                                <li><a href="{% url 'text-author-list' %}">Люди, которые пишут</a></li>
-                                <li><a href="{% url 'sound-author-list' %}">Люди, которые читают</a></li>
-                                <li><a href="{% url 'text-list' %}">Коллекция прочитанных произведений</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><a href="{% url 'how' %}">Как это работает?</a></li>
+                    <li{% block li_sound_list %}{% endblock %}><a href="{% url 'sound-list' %}">Послушать других</a></li>
+                    <li{% block li_request_list %}{% endblock %}><a href="{% url 'request-list' %}">Почитать самому</a></li>
+                    <li{% block li_request_create %}{% endblock %}><a href="{% url 'request-create' %}">Попросить, чтобы тебе почитал</a></li>
                 </ul>
+
                 <div class="uk-navbar-flip">
                     <ul class="uk-navbar-nav">
                         {% if user.is_authenticated %}
                         <li><a href="{{ user.profile.get_absolute_url }}">{% user_display user %}</a></li>
                         <li><a href="{% url 'account_logout' %}">Выход</a></li>
                         {% else %}
-                        <li><a href="{% url 'account_login' %}">Вход</a></li>
-                        <li><a href="{% url 'account_signup' %}">Регистрация</a></li>
+                        <li><a href="{% url 'account_login' %}">вход</a></li>
+                        <li><a href="{% url 'account_signup' %}">регистрация</a></li>
                         {% endif %}
                     </ul>
                 </div>
             </div>
         </nav>
         {% block content-main %}{% endblock %}
+        <div class="footer uk-block uk-block-muted uk-margin-large-top">
+            <div class="uk-container uk-container-center">
+                <div class="uk-grid">
+                    <div class="uk-width-1-4">
+                        <ul class="uk-nav">
+                            <li><a href="{% url 'how' %}">Как это работает?</a></li>
+                            <li><a href="{% url 'sound-author-list' %}">Люди, которые читают</a></li>
+                            <li><a href="{% url 'text-author-list' %}">Люди, которые пишут</a></li>
+                            <li><a href="{% url 'text-list' %}">Коллекция прочитанных произведений</a></li>
+                        </ul>
+                    </div>
+                    <div class="uk-width-1-2">
+                    </div>
+                    <div class="uk-width-1-4 uk-text-right">
+                        <p>
+                            {% now "Y" %} &copy; Почитаете мне?
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src="{% static 'app/js/jquery-3.1.1.min.js' %}"></script>
         <script src="{% static 'uikit/js/uikit.min.js' %}"></script>
-        <script src="{% static 'app/js/audiojs/audio.min.js' %}"></script>
-        <script>
-        </script>
         {% block extra_body %}{% endblock %}
     </body>
 </html>

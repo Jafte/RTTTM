@@ -4,22 +4,48 @@
 
 {% block title %}Список запросов{% endblock %}
 
+{% block li_request_list %} class="uk-active" {% endblock %}
+
 {% block content %}
     <h1>Список запросов</h1>
-    <p>
-        <a class="uk-button uk-button-primary" href="{% url 'request-create' %}">новая заявка</a>
-    </p>
+    <hr class="color-hr">
     <div class="uk-grid">
     {% for req in request_list %}
         <div class="uk-width-1-1">
-            <a class="uk-panel uk-panel-hover uk-panel-header" href="{{ req.get_absolute_url }}">
-                <h3 class="uk-panel-title">{{ req.title }}</h3>
-                <p>
-                    запрос {% user_display req.user %},
-
-                </p>
-            </a>
+            <h4>
+                <a href="{{ req.get_absolute_url }}">
+                #{{ req.pk }} от {{ req.created }}
+                </a>
+            </h4>
+            <p>
+               <a href="{{ user.profile.get_absolute_url }}">{% user_display req.user %}</a>
+                просит, чтобы ему почитали:
+                <b>{{ req.title }}</b>
+            </p>
         </div>
     {% endfor %}
+    </div>
+{% endblock %}
+
+
+{% block sidebar %}
+    <a class="uk-button uk-button-primary uk-width-1-1 uk-margin-bottom" href="{% url 'request-create' %}">
+        новая заявку
+    </a>
+    <div class="uk-panel uk-panel-box">
+        <p>
+            А это блок для чего-то.
+        </p>
+        <p>
+            Для чего он именно - я пока не решил.
+            Но без него список записей слишком широкий и страшный.
+            А я не хочу, чтобы он был страшным.
+            Поэтому я разместил тут этот блок.
+        </p>
+        <p>
+            Возможно, в нем будет дополнительная навигация в виде тегов
+            или что-то еще, не менее полезное, например номальный плеер
+            с возможность составить свой плейлист, полистать его и все такое.
+        </p>
     </div>
 {% endblock %}

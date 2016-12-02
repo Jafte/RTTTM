@@ -8,7 +8,7 @@ class RequestForm(ModelForm):
         fields = ('title', 'description', 'url_to_source', 'text_source')
         widgets = {
             'title': TextInput(attrs={'class': 'uk-width-1-1'}),
-            'description': Textarea(attrs={'class': 'uk-width-1-1'}),
+            'description': Textarea(attrs={'class': 'uk-width-1-1', 'rows': 10}),
             'url_to_source': TextInput(attrs={'class': 'uk-width-1-1'}),
-            'text_source': Textarea(attrs={'class': 'uk-width-1-1'}),
+            'text_source': Textarea(attrs={'class': 'uk-width-1-1', 'rows': 5}),
         }

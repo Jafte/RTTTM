@@ -2,24 +2,43 @@
 
 {% block title %}Список аудиозаписей{% endblock %}
 
+{% block li_sound_list %} class="uk-active" {% endblock %}
+
 {% block content %}
     <article class="uk-article">
         <h1 class="uk-article-title">{{ sound.text.name }}</h1>
+        <hr class="color-hr">
         <p class="uk-article-meta">
-            Озвучка: <a href="{{ sound.author.get_absolute_url }}">{{ sound.author }}</a>,
-            автор текста: <a href="{{ sound.text.author.get_absolute_url }}">{{ sound.text.author }}</a>
+            по произведению <a href="{{ sound.text.get_absolute_url }}">{{ sound.text.name }}</a>
+            (<a href="{{ sound.text.author.get_absolute_url }}">{{ sound.text.author }}</a>),
+            читает <a href="{{ sound.author.get_absolute_url }}">{{ sound.author }}</a>
         </p>
-        <hr class="uk-article-divider">
-        <audio class="uk-width-1-2" src="{{ sound.file.url }}" preload="none" controls></audio>
+        <audio class="uk-width-3-4" src="{{ sound.file.url }}" preload="none" controls></audio>
+        {% if sound.description %}
+            <h3>От автора:</h3>
+            <p>{{ sound.description }}</p>
+        {% endif %}
     </article>
-    <h4>Другие варианты озвучки</h4>
-    {% for other_sound in sound.get_other_sounds %}
-        <p>
-            <a href="{{ other_sound.get_absolute_url }}">
-            читает {{ other_sound.author }}
-            </a>
-        </p>
-    {% empty %}
-        <p>записей не найдено</p>
-    {% endfor %}
+    <hr/>
+    <p>Тут должны быть кнопки соцсетей, типа лайкнуть вкантакте и все такое.</p>
+    <hr class="color-hr">
+    <div class="uk-grid">
+        <div class="uk-width-1-2">
+            {% if other_sound in sound.get_other_sounds %}
+                <h4>Другие варианты озвучки</h4>
+                {% for other_sound in sound.get_other_sounds %}
+                    <p>
+                        <a href="{{ other_sound.get_absolute_url }}">
+                        читает {{ other_sound.author }}
+                        </a>
+                    </p>
+                {% endfor %}
+            {% else %}
+            <p>тут должны быть записи других авторов, но их нет и надо вывести что-то другое, но потом...</p>
+            {% endif %}
+        </div>
+        <div class="uk-width-1-2">
+            <p>а тут можно вывести пару свежих записей того же автора</p>
+        </div>
+    </div>
 {% endblock %}
