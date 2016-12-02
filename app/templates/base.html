@@ -9,9 +9,9 @@
         <nav class="uk-navbar">
             <div class="uk-container uk-container-center">
                 <a href="{% url 'index' %}" class="uk-navbar-brand">
-                    <img src="{% static 'app/img/logo.png' %}" width="145" height="74" alt="can your read for me?">
+                    <img src="{% static 'app/img/logo.png' %}" width="319" height="225" alt="can your read for me?">
                 </a>
-                <ul class="uk-navbar-nav">
+                <ul class="uk-navbar-nav left-minus">
                     <li{% block li_sound_list %}{% endblock %}><a href="{% url 'sound-list' %}">Послушать других</a></li>
                     <li{% block li_request_list %}{% endblock %}><a href="{% url 'request-list' %}">Почитать самому</a></li>
                     <li{% block li_request_create %}{% endblock %}><a href="{% url 'request-create' %}">Попросить, чтобы тебе почитал</a></li>

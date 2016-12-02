@@ -1,3 +1,18 @@
+.uk-navbar {
+    margin-top: 75px;
+    margin-bottom: 75px;
+}
+
+.uk-navbar-brand img {
+    position: relative;
+    top: -72px;
+    left: -55px;
+}
+
+.left-minus {
+    margin-left: -40px;
+}
+
 .uk-navbar-brand, .uk-navbar-content, .uk-navbar-toggle,
 .uk-navbar-nav>li>a {
     height: 75px;
