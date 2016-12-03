@@ -14,7 +14,7 @@
                 <ul class="uk-navbar-nav navbar-after-brand">
                     <li{% block li_sound_list %}{% endblock %}><a href="{% url 'sound-list' %}">Послушать других</a></li>
                     <li{% block li_request_list %}{% endblock %}><a href="{% url 'request-list' %}">Почитать самому</a></li>
-                    <li{% block li_request_create %}{% endblock %}><a href="{% url 'request-create' %}">Попросить, чтобы тебе почитал</a></li>
+                    <li{% block li_request_create %}{% endblock %}><a href="{% url 'request-create' %}">Попросить, чтобы тебе почитали</a></li>
                 </ul>
 
                 <div class="uk-navbar-flip">
@@ -35,6 +35,8 @@
             <div class="uk-container uk-container-center">
                 <div class="uk-grid">
                     <div class="uk-width-1-4">
+                        <h3>Можно посмотреть</h3>
+                        <hr class="border-top border-color-main">
                         <ul class="uk-nav">
                             <li><a href="{% url 'how' %}">Как это работает?</a></li>
                             <li><a href="{% url 'sound-author-list' %}">Люди, которые читают</a></li>

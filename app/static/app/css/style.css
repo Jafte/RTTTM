@@ -28,7 +28,7 @@
 }
 
 .navbar-after-brand {
-    margin-left: 20px;
+
 }
 
 .sound-item {
@@ -37,4 +37,15 @@
 
 audio {
     height: 30px;
+}
+
+.index-text-block {
+    height: 300px;
+    font-size: 40px;
+    line-height: 60px;
+    color: #FFF;
+}
+
+.index-text-block-background {
+    background: rgba(0, 0, 0, 0.2)
 }
