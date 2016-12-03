@@ -7,7 +7,7 @@
 {% block content %}
     <article class="uk-article">
         <h1 class="uk-article-title">{{ sound.text.name }}</h1>
-        <hr class="color-hr">
+        <hr class="border-top border-color-main">
         <p class="uk-article-meta">
             по произведению <a href="{{ sound.text.get_absolute_url }}">{{ sound.text.name }}</a>
             (<a href="{{ sound.text.author.get_absolute_url }}">{{ sound.text.author }}</a>),
@@ -21,7 +21,7 @@
     </article>
     <hr/>
     <p>Тут должны быть кнопки соцсетей, типа лайкнуть вкантакте и все такое.</p>
-    <hr class="color-hr">
+    <hr class="border-top border-color-main">
     <div class="uk-grid">
         <div class="uk-width-1-2">
             {% if other_sound in sound.get_other_sounds %}

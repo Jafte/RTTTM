@@ -4,6 +4,7 @@
 
 {% block content %}
     <h1>Список текстов</h1>
+    <hr class="border-top border-color-main">
     {% for text in text_list %}
         <a class="uk-panel uk-panel-hover uk-panel-header" href="{{ text.get_absolute_url }}">
             <h3 class="uk-panel-title">{{ text.name }}</h3>

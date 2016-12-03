@@ -4,7 +4,7 @@
 
 {% block title %}Профиль пользователя: {% user_display user_data %}{% endblock %}
 
-{% block content-container %}
+{% block content %}
     <h2>{% user_display user_data %}</h2>
     {% if user_data.profile.about %}
     <p>{{ user_data.profile.about }}</p>

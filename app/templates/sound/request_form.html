@@ -8,7 +8,7 @@
 
 {% block content %}
     <h1>Прочтите для меня, пожалуйста</h1>
-    <hr class="color-hr">
+    <hr class="border-top border-color-main">
     <form class="uk-form uk-form-horizontal" id="signup_form" method="post" action="{% url 'request-create' %}">
         {% csrf_token %}
         {{ form|crispy }}

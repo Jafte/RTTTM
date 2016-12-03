@@ -4,6 +4,7 @@
 
 {% block content %}
     <h1>Список авторов</h1>
+    <hr class="border-top border-color-main">
     {% for author in author_list %}
         <a class="uk-panel uk-panel-hover uk-panel-header" href="{{ author.get_absolute_url }}">
             <h3 class="uk-panel-title">{{ author.name }}</h3>

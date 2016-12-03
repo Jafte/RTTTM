@@ -4,6 +4,7 @@
 
 {% block content %}
     <h1>{{ author.name }}</h1>
+    <hr class="border-top border-color-main">
     {{ author.about|linebreaks }}
     <h2>Произведения:</h2>
     {% for text in author.texts.all %}

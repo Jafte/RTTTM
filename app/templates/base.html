@@ -1,17 +1,17 @@
 <!DOCTYPE html>{% load static account %}
 <html>
     <head>
-        <title>{% block title %}Почитаешь мне?{% endblock %}</title>
+        <title>{% block title %}Самая главная страница на сайте{% endblock %} :: Почитаешь мне?</title>
         <link rel="stylesheet" href="{% static 'uikit/css/uikit.min.css' %}" />
         <link rel="stylesheet" href="{% static 'app/css/style.css' %}" />
     </head>
     <body>
-        <nav class="uk-navbar">
+        <nav class="uk-navbar border-top border-color-main">
             <div class="uk-container uk-container-center">
                 <a href="{% url 'index' %}" class="uk-navbar-brand">
-                    <img src="{% static 'app/img/logo.png' %}" width="319" height="225" alt="can your read for me?">
+                    <img src="{% static 'app/img/logo.svg' %}" data-uk-svg width="174" height="50" alt="can your read for me?">
                 </a>
-                <ul class="uk-navbar-nav left-minus">
+                <ul class="uk-navbar-nav navbar-after-brand">
                     <li{% block li_sound_list %}{% endblock %}><a href="{% url 'sound-list' %}">Послушать других</a></li>
                     <li{% block li_request_list %}{% endblock %}><a href="{% url 'request-list' %}">Почитать самому</a></li>
                     <li{% block li_request_create %}{% endblock %}><a href="{% url 'request-create' %}">Попросить, чтобы тебе почитал</a></li>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="uk-width-1-4 uk-text-right">
                         <p>
-                            {% now "Y" %} &copy; Почитаете мне?
+                            {% now "Y" %} &copy; Почитаешь мне?
                         </p>
                     </div>
                 </div>

@@ -6,10 +6,10 @@
 
 {% block content %}
     <h1>
-        <i class="uk-icon-volume-up uk-text-success"></i>
+        <i class="uk-icon-volume-up color-primary"></i>
         Послушать других
     </h1>
-    <hr class="color-hr">
+    <hr class="border-top border-color-main">
     {% for sound in sound_list %}
         {% include "sound/snippets/sound_list.html" with sound=sound mode="full" %}
     {% empty %}

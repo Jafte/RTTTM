@@ -6,7 +6,7 @@
 
 {% block content %}
     <h2>Прочитано:</h2>
-    <hr class="color-hr">
+    <hr class="border-top border-color-main">
     {% for sound in author.sounds.all %}
         {% include "sound/snippets/sound_list.html" with sound=sound mode="no-author" %}
     {% empty %}
