@@ -1,13 +1,56 @@
 {% extends 'sound/base.html' %}
 
+{% load account %}
+
 {% block title %}{{ request_object.title }}{% endblock %}
 
 {% block li_request_list %} class="uk-active" {% endblock %}
 
-{% block content-container %}
+{% block content %}
     <article class="uk-article">
         <h1 class="uk-article-title">{{ request_object.title }}</h1>
+        <p class="uk-article-meta">
+            запрос поступил от пользователя
+            <a href="{{ request_object.user.profile.get_absolute_url }}">
+                {% user_display request_object.user %}
+            </a>
+            {{ request_object.created }}
+        </p>
+
+        {% if request_object.description %}
         <hr class="uk-article-divider">
-        {{ request_object.text|linebreaks }}
+        <p>{{ request_object.description|linebreaks }}</p>
+        {% endif %}
+
+        {% if request_object.url_to_source %}
+        <hr class="uk-article-divider">
+        <p><b>Ссылка на оригинал:</b> {{ request_object.url_to_source }}</p>
+        {% endif %}
+
+        {% if request_object.text_source %}
+        <hr class="uk-article-divider">
+        <h3>Оригинал</h3>
+        <p>{{ request_object.text_source|linebreaks }}</p>
+        {% endif %}
+
     </article>
+{% endblock %}
+
+{% block sidebar %}
+    <div class="uk-panel uk-panel-box">
+        <p>
+            <b>Статус:</b>
+            {{ request_object.get_status_display }}
+        </p>
+        <p>
+            <b>Принят исполнителями:</b>
+            <ul>
+            {% for taken_by_user in request_object.taken_by_users.all %}
+                <li>{% user_display request_object.user %}</li>
+            {% empty %}
+                <li>никто еще не брался :(</li>
+            {% endfor %}
+            </ul>
+        </p>
+    </div>
 {% endblock %}
