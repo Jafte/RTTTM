@@ -11,7 +11,7 @@
     <hr class="border-top border-color-main">
     <div class="uk-grid">
     {% for req in request_list %}
-        <div class="uk-width-1-1">
+        <div class="uk-width-1-1 uk-margin-bottom">
             <h4>
                 <a href="{{ req.get_absolute_url }}">
                 #{{ req.pk }} от {{ req.created }}
