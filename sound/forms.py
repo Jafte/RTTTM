@@ -12,3 +12,9 @@ class RequestForm(ModelForm):
             'url_to_source': TextInput(attrs={'class': 'uk-width-1-1'}),
             'text_source': Textarea(attrs={'class': 'uk-width-1-1', 'rows': 5}),
         }
+        labels = {
+            'title': 'Что будем читать?',
+            'description': 'Подробности',
+            'url_to_source': 'Ссылка на оригинал',
+            'text_source': 'Оригинал',
+        }
