@@ -19,6 +19,12 @@ class TextList(ListView):
     template_name = "text/text_list.html"
     context_object_name = "text_list"
 
+    def get_context_data(self, **kwargs):
+        context = super(TextList, self).get_context_data(**kwargs)
+        context["last_authors"] = Author.objects.all()[:12]
+
+        return context
+
 
 class TextDetail(DetailView):
     model = Text

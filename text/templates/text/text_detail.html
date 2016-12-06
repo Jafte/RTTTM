@@ -3,16 +3,6 @@
 {% block title %}{{ text.name }}{% endblock %}
 
 {% block content %}
-    <div class="uk-panel uk-panel-box uk-float-right uk-margin-left uk-margin-bottom" style="width: 350px;">
-        <h4>Известные озвучки</h4>
-        {% for sound in text.sounds.all %}
-            <p><a href="{{ sound.get_absolute_url }}">
-                читает {{ sound.author }}
-            </a></p>
-        {% empty %}
-            <p>записей не найдено</p>
-        {% endfor %}
-    </div>
     <article class="uk-article">
         <h1 class="uk-article-title">{{ text.name }}</h1>
         <hr class="border-top border-color-main">
@@ -20,4 +10,14 @@
         <hr class="uk-article-divider">
         {{ text.text|linebreaks }}
     </article>
+{% endblock %}
+
+{% block sidebar %}
+    <div class="uk-panel uk-panel-box">
+        {% for sound in text.sounds.all %}
+            {% include "sound/snippets/sound_list.html" with sound=sound mode="no-text" %}
+        {% empty %}
+            <p>Никто еще не читал данное произведение :(</p>
+        {% endfor %}
+    </div>
 {% endblock %}

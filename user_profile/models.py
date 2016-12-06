@@ -21,6 +21,14 @@ class Profile(models.Model):
         return '%s profile' % self.user
 
 
+class VoiceRequest(models.Model):
+    user = models.ForeignKey(User)
+    message = models.TextField()
+    response = models.TextField(blank=True)
+    created = models.DateTimeField(verbose_name=_('created'), auto_now_add=True)
+    modified = models.DateTimeField(verbose_name=_('modified'), auto_now=True)
+
+
 def user_changed(sender, **kwargs):
     user = kwargs["instance"]
     if hasattr(user, 'profile'):

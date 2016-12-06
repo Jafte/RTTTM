@@ -1,0 +1,28 @@
+{% extends 'text/base.html' %}
+
+{% block title %}Коллекция прочитанных произведений{% endblock %}
+
+{% block content %}
+    <h1>Коллекция прочитанного</h1>
+    <hr class="border-top border-color-main">
+    {% for text in text_list %}
+        {% include "text/snippets/text_list.html" with text=text mode="short" %}
+    {% endfor %}
+{% endblock %}
+
+{% block sidebar %}
+<div class="uk-panel">
+    <h4 class="uk-text-center">Некоторые из писателей, которых мы читаем</h4>
+    <div class="uk-grid">
+    {% for author in last_authors %}
+        <div class="uk-width-1-3">
+        {% include "text/snippets/author_list_short.html" with author=author %}
+        </div>
+    {% empty %}
+        <div class="uk-width-1-1">
+            Никого не нашли :(
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
