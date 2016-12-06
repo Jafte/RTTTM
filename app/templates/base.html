@@ -11,12 +11,24 @@
         <nav class="uk-navbar border-top border-color-main">
             <div class="uk-container uk-container-center">
                 <a href="{% url 'index' %}" class="uk-navbar-brand">
-                    <img src="{% static 'app/img/logo.svg' %}" data-uk-svg width="174" height="50" alt="can your read for me?">
+                    <img
+                            src="{% static 'app/img/logo.svg' %}"
+                            data-uk-svg
+                            width="174"
+                            height="50"
+                            alt="can your read for me?"
+                    >
                 </a>
                 <ul class="uk-navbar-nav navbar-after-brand">
-                    <li{% block li_sound_list %}{% endblock %}><a href="{% url 'sound-list' %}">Послушать других</a></li>
-                    <li{% block li_request_list %}{% endblock %}><a href="{% url 'request-list' %}">Почитать самому</a></li>
-                    <li{% block li_request_create %}{% endblock %}><a href="{% url 'request-create' %}">Попросить, чтобы тебе почитали</a></li>
+                    <li{% block li_sound_list %}{% endblock %}>
+                        <a href="{% url 'sound-list' %}">Послушать других</a>
+                    </li>
+                    <li{% block li_request_list %}{% endblock %}>
+                        <a href="{% url 'request-list' %}">Почитать самому</a>
+                    </li>
+                    <li{% block li_request_create %}{% endblock %}>
+                        <a href="{% url 'request-create' %}">Попросить, чтобы тебе почитали</a>
+                    </li>
                 </ul>
 
                 <div class="uk-navbar-flip">
@@ -25,8 +37,8 @@
                         <li><a href="{{ user.profile.get_absolute_url }}">{% user_display user %}</a></li>
                         <li><a href="{% url 'account_logout' %}">Выход</a></li>
                         {% else %}
-                        <li><a href="{% url 'account_login' %}">вход</a></li>
-                        <li><a href="{% url 'account_signup' %}">регистрация</a></li>
+                        <li><a href="{% url 'account_login' %}">Вход</a></li>
+                        <li><a href="{% url 'account_signup' %}">Регистрация</a></li>
                         {% endif %}
                     </ul>
                 </div>
@@ -49,9 +61,7 @@
                     <div class="uk-width-1-2">
                     </div>
                     <div class="uk-width-1-4 uk-text-right">
-                        <p>
-                            {% now "Y" %} &copy; Почитаешь мне?
-                        </p>
+                        <p>{% now "Y" %} &copy; Почитаешь мне?</p>
                     </div>
                 </div>
             </div>
