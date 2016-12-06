@@ -30,11 +30,13 @@
             <a class="uk-float-right" href="{{ sound.get_absolute_url }}"><i class="uk-icon-link"></i></a>
             {% endif %}
             <div class="sound-info">
-                {% if mode != 'no-text' %}
-                по произведению <a href="{{ sound.text.get_absolute_url }}">{{ sound.text.name }}</a>
-                (<a href="{{ sound.text.author.get_absolute_url }}">{{ sound.text.author }}</a>),
+                {% spaceless %}
+                {% if mode != 'no-text' %}<span>по произведению <a href="{{ sound.text.get_absolute_url }}">{{ sound.text.name }}</a>
+                (<a href="{{ sound.text.author.get_absolute_url }}">{{ sound.text.author }}</a>){% endif %}</span>
+                {% if mode != "no-author" %}
+                <span>, читает <a href="{{ sound.author.get_absolute_url }}">{{ sound.author }}</a></span>
                 {% endif %}
-                читает <a href="{{ sound.author.get_absolute_url }}">{{ sound.author }}</a>
+                {% endspaceless %}
             </div>
             <div class="sound-file">
                 <audio class="uk-width-1-1" src="{{ sound.file.url }}" preload="none" controls></audio>
