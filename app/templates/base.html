@@ -8,7 +8,7 @@
         {% block extra_head %}{% endblock %}
     </head>
     <body>
-        <nav class="uk-navbar border-top border-color-main">
+        <nav class="uk-navbar border-top border-color-main uk-navbar-attached ">
             <div class="uk-container uk-container-center">
                 <a href="{% url 'index' %}" class="uk-navbar-brand">
                     <img
@@ -44,7 +44,9 @@
                 </div>
             </div>
         </nav>
+        <div id="main-content">
         {% block content-main %}{% endblock %}
+        </div>
         <div class="footer uk-block uk-block-muted uk-margin-large-top">
             <div class="uk-container uk-container-center">
                 <div class="uk-grid">

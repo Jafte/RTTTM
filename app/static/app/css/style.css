@@ -17,7 +17,20 @@
 }
 
 .uk-navbar {
-    margin-bottom: 20px;
+    z-index: 500;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.footer {
+    border-top: 1px solid #ccc;
+}
+
+#main-content {
+    margin-top: 100px;
 }
 
 .uk-navbar-brand, .uk-navbar-content, .uk-navbar-toggle,
