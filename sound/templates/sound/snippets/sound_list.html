@@ -32,9 +32,12 @@
             <div class="sound-info">
                 {% spaceless %}
                 {% if mode != 'no-text' %}<span>по произведению <a href="{{ sound.text.get_absolute_url }}">{{ sound.text.name }}</a>
-                (<a href="{{ sound.text.author.get_absolute_url }}">{{ sound.text.author }}</a>){% endif %}</span>
+                (<a href="{{ sound.text.author.get_absolute_url }}">{{ sound.text.author }}</a>)</span>{% endif %}
+                {% if mode != 'no-text' and mode != "no-author" %}
+                <span>, </span>
+                {% endif %}
                 {% if mode != "no-author" %}
-                <span>, читает <a href="{{ sound.author.get_absolute_url }}">{{ sound.author }}</a></span>
+                <span>читает <a href="{{ sound.author.get_absolute_url }}">{{ sound.author }}</a></span>
                 {% endif %}
                 {% endspaceless %}
             </div>
