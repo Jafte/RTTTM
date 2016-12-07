@@ -3,18 +3,22 @@
 {% block title %}Люди, которые читают{% endblock %}
 
 {% block content-container %}
-    <div class="white-container">
-    <h1>
-        <i class="uk-icon-microphone color-primary"></i>
-         Наши голоса
-    </h1>
-    <hr class="border-top border-color-main">
-    <div class="uk-grid uk-grid-small">
-    {% for author in author_list %}
-        <div class="uk-width-1-4">
-        {% include "sound/snippets/author_list_short.html" with author=author %}
+<div class="uk-grid">
+    <div class="uk-width-1-1">
+        <div class="white-container">
+            <h1>
+                <i class="uk-icon-microphone color-primary"></i>
+                 Наши голоса
+            </h1>
+            <hr class="border-top border-color-main">
+            <div class="uk-grid uk-grid-small">
+            {% for author in author_list %}
+                <div class="uk-width-1-4">
+                {% include "sound/snippets/author_list_short.html" with author=author %}
+                </div>
+            {% endfor %}
+            </div>
         </div>
-    {% endfor %}
     </div>
-    </div>
+</div>
 {% endblock %}
