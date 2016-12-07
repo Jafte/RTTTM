@@ -3,6 +3,7 @@
 {% block title %}Люди, которые читают{% endblock %}
 
 {% block content-container %}
+    <div class="white-container">
     <h1>
         <i class="uk-icon-microphone color-primary"></i>
          Наши голоса
@@ -14,5 +15,6 @@
         {% include "sound/snippets/author_list_short.html" with author=author %}
         </div>
     {% endfor %}
+    </div>
     </div>
 {% endblock %}

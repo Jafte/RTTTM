@@ -3,6 +3,7 @@
 {% block title %}Список авторов{% endblock %}
 
 {% block content-container %}
+    <div class="white-container">
     <h1>
         <i class="uk-icon-book color-primary"></i>
          Список авторов
@@ -14,5 +15,6 @@
         {% include "text/snippets/author_list_short.html" with author=author %}
         </div>
     {% endfor %}
+    </div>
     </div>
 {% endblock %}
