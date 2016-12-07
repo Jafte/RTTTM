@@ -1,3 +1,8 @@
+html, body {
+    background: #f0eeef;
+	height: 100%;
+}
+
 .border-top {
     border-top-width: 5px;
     border-top-style: solid;
@@ -23,14 +28,29 @@
     left: 0;
     right: 0;
     border-bottom: 1px solid #ccc;
+    background: #f0eeef;
+}
+
+.uk-panel-box {
+    background: #f0eeef;
 }
 
 .footer {
     border-top: 1px solid #ccc;
+    margin: 0px;
+    background: #f0eeef;
 }
 
 #main-content {
-    margin-top: 100px;
+    padding-top: 100px;
+    padding-bottom: 30px;
+    min-height: 500px;
+    background: #f8f7f7;
+}
+
+#main-content .white-container {
+    padding: 35px;
+    background: #fefefe;
 }
 
 .uk-navbar-brand, .uk-navbar-content, .uk-navbar-toggle,

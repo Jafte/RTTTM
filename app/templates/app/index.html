@@ -6,59 +6,61 @@
 <div class="uk-container uk-container-center">
     <div class="uk-grid">
         <div class="uk-width-3-5">
-            <div class="uk-grid">
-                <div class="uk-width-2-5">
-                    <div
-                        class="uk-cover-background uk-position-relative index-text-block"
-                        style="background-image: url('{% static 'app/img/how.jpg' %}');"
-                    >
-                        <div class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-text-center index-text-block-background">
-                            Как<br/>
-                            все<br/>
-                            работает?
+            <div class="white-container">
+                <div class="uk-grid">
+                    <div class="uk-width-2-5">
+                        <div
+                            class="uk-cover-background uk-position-relative index-text-block"
+                            style="background-image: url('{% static 'app/img/how.jpg' %}');"
+                        >
+                            <div class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-text-center index-text-block-background">
+                                Как<br/>
+                                все<br/>
+                                работает?
+                            </div>
+                            <a class="uk-position-cover" href="{% url 'how' %}"></a>
                         </div>
-                        <a class="uk-position-cover" href="{% url 'how' %}"></a>
+                    </div>
+                    <div class="uk-width-3-5">
+                        <div
+                            class="uk-cover-background uk-position-relative index-text-block"
+                            style="background-image: url('{% static 'app/img/sound-author-list.jpg' %}');"
+                        >
+                            <div class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-text-center index-text-block-background">
+                                Люди,<br/>
+                                которые<br/>
+                                читают
+                            </div>
+                            <a class="uk-position-cover" href="{% url 'sound-author-list' %}"></a>
+                        </div>
                     </div>
                 </div>
-                <div class="uk-width-3-5">
-                    <div
-                        class="uk-cover-background uk-position-relative index-text-block"
-                        style="background-image: url('{% static 'app/img/sound-author-list.jpg' %}');"
-                    >
-                        <div class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-text-center index-text-block-background">
-                            Люди,<br/>
-                            которые<br/>
-                            читают
+                <div class="uk-grid">
+                    <div class="uk-width-3-5">
+                        <div
+                            class="uk-cover-background uk-position-relative index-text-block"
+                            style="background-image: url('{% static 'app/img/text-author-list.jpg' %}');"
+                        >
+                            <div class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-text-center index-text-block-background">
+                                Люди,<br/>
+                                которые<br/>
+                                пишут
+                            </div>
+                            <a class="uk-position-cover" href="{% url 'text-author-list' %}"></a>
                         </div>
-                        <a class="uk-position-cover" href="{% url 'sound-author-list' %}"></a>
                     </div>
-                </div>
-            </div>
-            <div class="uk-grid">
-                <div class="uk-width-3-5">
-                    <div
-                        class="uk-cover-background uk-position-relative index-text-block"
-                        style="background-image: url('{% static 'app/img/text-author-list.jpg' %}');"
-                    >
-                        <div class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-text-center index-text-block-background">
-                            Люди,<br/>
-                            которые<br/>
-                            пишут
+                    <div class="uk-width-2-5">
+                        <div
+                            class="uk-cover-background uk-position-relative index-text-block"
+                            style="background-image: url('{% static 'app/img/text-list.jpg' %}');"
+                        >
+                            <div class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-text-center index-text-block-background">
+                                Все,<br/>
+                                что<br/>
+                                читали
+                            </div>
+                            <a class="uk-position-cover" href="{% url 'text-list' %}"></a>
                         </div>
-                        <a class="uk-position-cover" href="{% url 'text-author-list' %}"></a>
-                    </div>
-                </div>
-                <div class="uk-width-2-5">
-                    <div
-                        class="uk-cover-background uk-position-relative index-text-block"
-                        style="background-image: url('{% static 'app/img/text-list.jpg' %}');"
-                    >
-                        <div class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-text-center index-text-block-background">
-                            Все,<br/>
-                            что<br/>
-                            читали
-                        </div>
-                        <a class="uk-position-cover" href="{% url 'text-list' %}"></a>
                     </div>
                 </div>
             </div>
