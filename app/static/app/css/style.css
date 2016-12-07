@@ -72,6 +72,10 @@ audio {
     height: 30px;
 }
 
+.sound-file {
+    margin: 10px 0;
+}
+
 .index-text-block {
     height: 300px;
     font-size: 40px;
