@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
+from easy_thumbnails.fields import ThumbnailerImageField
+from uuid_upload_path import upload_to
 from django.urls import reverse
 
 from django.db.models.signals import post_save
@@ -12,6 +14,7 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, unique=True, verbose_name=_('user'), related_name='profile') 
     about = models.TextField(_('about me'), blank=True)
+    photo = ThumbnailerImageField(verbose_name=_('photo'), upload_to=upload_to, blank=True)
     is_voice_artist = models.BooleanField(_('is voice artist'), default=False)
 
     def get_absolute_url(self):

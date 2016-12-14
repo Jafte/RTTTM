@@ -24,6 +24,9 @@
 {% if user_data == request.user %}
     <ul class="uk-subnav uk-subnav uk-subnav-line uk-margin-top">
         <li>
+            <a href="{% url 'user-profile-edit' username=user_data.username %}">редактировать</a>
+        </li>
+        <li>
             <a href="{% url 'account_change_password' %}">сменить пароль</a>
         </li>
         <li>
