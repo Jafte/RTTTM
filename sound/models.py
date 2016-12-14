@@ -18,7 +18,7 @@ STATUS_CHOICES = (
 class Author(models.Model):
     name = models.CharField(verbose_name=_('name'), max_length=200)
     about = models.TextField(verbose_name=_('about'), blank=True)
-    user = models.ForeignKey(to=User, null=True, blank=True)
+    user = models.ForeignKey(to=User, null=True, blank=True, related_name="voices")
     photo = ThumbnailerImageField(verbose_name=_('photo'), upload_to=upload_to, blank=True)
 
     def __str__(self):

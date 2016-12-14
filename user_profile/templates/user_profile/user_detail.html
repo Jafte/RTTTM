@@ -5,8 +5,17 @@
 {% block title %}Профиль пользователя: {% user_display user_data %}{% endblock %}
 
 {% block content %}
-    <h2>{% user_display user_data %}</h2>
-    {% if user_data.profile.about %}
-    <p>{{ user_data.profile.about }}</p>
+    <h2>Все, что нам известно:</h2>
+    <hr class="border-top border-color-main">
+    <p>Зарегистрировался на сайте {{ user_data.date_joined }}</p>
+    {% if user_data.profile.is_voice_artist %}
+        <p>Радует нас своим голосом:</p>
+        <ul>
+        {% for voice in user_data.voices.all %}
+            <li><a href="{{ voice.get_absolute_url }}">{{ voice.name }}</a> - прочитано всего {{ voice.sounds.all.count }}</li>
+        {% endfor %}
+        </ul>
+        <p></p>
     {% endif %}
+    <p>Оставил запросов на чтение: {{ user_data.created_requests.all.count }}</p>
 {% endblock %}

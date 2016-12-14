@@ -1,42 +1,51 @@
-{% extends "account/base.html" %}
+{% extends "user_profile/base.html" %}
 
-{% load i18n %}
+{% load i18n crispy_forms_tags %}
 
-{% block head_title %}{% trans "Account" %}{% endblock %}
+{% block title %}Управление e-mail адресами аккаунта{% endblock %}
+
+{% block sidebar %}
+    {% include "user_profile/snippets/profile_sidebar.html" with user_data=user %}
+{% endblock %}
 
 {% block content %}
     <h1>{% trans "E-mail Addresses" %}</h1>
+    <hr class="border-top border-color-main">
 {% if user.emailaddress_set.all %}
 <p>{% trans 'The following e-mail addresses are associated with your account:' %}</p>
 
-<form action="{% url 'account_email' %}" class="email_list" method="post">
-{% csrf_token %}
-<fieldset class="blockLabels">
+<form action="{% url 'account_email' %}" class="email_list uk-form uk-form-horizontal" method="post">
+    {% csrf_token %}
 
-  {% for emailaddress in user.emailaddress_set.all %}
-<div class="ctrlHolder">
-      <label for="email_radio_{{forloop.counter}}" class="{% if emailaddress.primary %}primary_email{%endif%}">
+    {% for emailaddress in user.emailaddress_set.all %}
+    <div class="uk-form-row">
+        <label for="email_radio_{{forloop.counter}}" class="{% if emailaddress.primary %}primary_email{%endif%}">
+            <input
+                    id="email_radio_{{forloop.counter}}"
+                    type="radio"
+                    name="email"
+                    {% if emailaddress.primary or user.emailaddress_set.count == 1 %}checked="checked"{%endif %}
+                    value="{{emailaddress.email}}"
+            />
+            {{ emailaddress.email }}
 
-      <input id="email_radio_{{forloop.counter}}" type="radio" name="email" {% if emailaddress.primary or user.emailaddress_set.count == 1 %}checked="checked"{%endif %} value="{{emailaddress.email}}"/>
+            {% if emailaddress.verified %}
+            <div class="uk-badge uk-badge-primary">{% trans "Verified" %}</div>
+            {% else %}
+            <div class="uk-badge uk-badge-warning">{% trans "Unverified" %}</div>
+            {% endif %}
 
-{{ emailaddress.email }}
-    {% if emailaddress.verified %}
-    <span class="verified">{% trans "Verified" %}</span>
-    {% else %}
-    <span class="unverified">{% trans "Unverified" %}</span>
-    {% endif %}
-      {% if emailaddress.primary %}<span class="primary">{% trans "Primary" %}</span>{% endif %}
-</label>
-</div>
-  {% endfor %}
+            {% if emailaddress.primary %}<div class="uk-badge uk-badge-success">{% trans "Primary" %}</div>{% endif %}
+        </label>
+    </div>
+    {% endfor %}
 
-<div class="buttonHolder">
-      <button class="secondaryAction" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
-      <button class="secondaryAction" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
-      <button class="primaryAction" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
-</div>
+    <div class="uk-form-row">
+          <button class="secondaryAction uk-button uk-button-primary" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
+          <button class="secondaryAction uk-button uk-button-primary" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
+          <button class="primaryAction uk-button uk-button-danger" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
+    </div>
 
-</fieldset>
 </form>
 
 {% else %}
@@ -46,11 +55,15 @@
 
 
     <h2>{% trans "Add E-mail Address" %}</h2>
-
-    <form method="post" action="{% url 'account_email' %}" class="add_email">
+    <hr class="border-top border-color-main">
+    <form method="post" action="{% url 'account_email' %}" class="add_email uk-form uk-form-horizontal">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button name="action_add" type="submit">{% trans "Add E-mail" %}</button>
+        {{ form|crispy }}
+        <div class="uk-form-row">
+            <div class="uk-form-controls">
+                <button class="uk-button uk-button-success" name="action_add" type="submit">{% trans "Add E-mail" %}</button>
+            </div>
+        </div>
     </form>
 
 {% endblock %}
