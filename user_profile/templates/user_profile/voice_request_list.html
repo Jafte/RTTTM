@@ -8,13 +8,32 @@
     <h1>Мои запросы на получение голоса</h1>
     <hr class="border-top border-color-main">
     {% for vr in object_list %}
-    <p>
-        {{ vr.message|linebreaks }}
-    </p>
-    {% if vr.response %}
-    <p>
-        Ответ: {{ vr.response }}
-    </p>
-    {% endif %}
+    <ul class="uk-comment-list">
+        <li>
+            <article class="uk-comment">
+                <header class="uk-comment-header">
+                    <div class="uk-comment-meta">создан {{ vr.created }}</div>
+                </header>
+                <div class="uk-comment-body">
+                    {{ vr.message|linebreaks }}
+                </div>
+            </article>
+            {% if vr.response %}
+            <ul>
+                <li>
+                    <article class="uk-comment uk-comment-primary">
+                        <header class="uk-comment-header">
+                            <h4 class="uk-comment-title">ответ модератора</h4>
+                            <div class="uk-comment-meta">создан {{ vr.modified }}</div>
+                        </header>
+                        <div class="uk-comment-body">
+                            {{ vr.response }}
+                        </div>
+                    </article>
+                </li>
+            </ul>
+            {% endif %}
+        </li>
+    </ul>
     {% endfor %}
 {% endblock %}
