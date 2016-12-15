@@ -8,13 +8,13 @@
     <h1>Мои запросы на получение голоса</h1>
     <hr class="border-top border-color-main">
     {% for vr in object_list %}
-    <div>
-        {{ vr.message }}
-    </div>
+    <p>
+        {{ vr.message|linebreaks }}
+    </p>
     {% if vr.response %}
-    <div>
+    <p>
         Ответ: {{ vr.response }}
-    </div>
+    </p>
     {% endif %}
     {% endfor %}
 {% endblock %}
