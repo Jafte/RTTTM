@@ -1,0 +1,23 @@
+{% extends "user_profile/base.html" %}
+
+{% load account static crispy_forms_tags %}
+
+{% block title %}Хочу читать!{% endblock %}
+
+{% block content %}
+    <h1>Хочу читать!</h1>
+    <hr class="border-top border-color-main">
+    <form
+            class="uk-form uk-form-horizontal"
+            method="post"
+            action="{%  url 'user-voice-request-create' username=user_data.username %}"
+    >
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="uk-form-row">
+            <div class="uk-form-controls">
+                <button class="uk-button uk-button-success" type="submit">Отправить</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

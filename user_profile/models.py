@@ -6,7 +6,6 @@ from uuid_upload_path import upload_to
 from django.urls import reverse
 
 from django.db.models.signals import post_save
-from sound.models import Author
 
 
 class Profile(models.Model):
@@ -19,6 +18,11 @@ class Profile(models.Model):
 
     def get_absolute_url(self):
         return reverse('user-profile-detail', kwargs={'username': self.user.username})
+
+    def has_voice_requests(self):
+        if VoiceRequest.objects.filter(user=self.user).count() > 0:
+            return True
+        return False
 
     def __str__(self):
         return '%s profile' % self.user

@@ -1,0 +1,20 @@
+{% extends "user_profile/base.html" %}
+
+{% load account static crispy_forms_tags %}
+
+{% block title %}Мои запросы на получение голоса!{% endblock %}
+
+{% block content %}
+    <h1>Мои запросы на получение голоса</h1>
+    <hr class="border-top border-color-main">
+    {% for vr in object_list %}
+    <div>
+        {{ vr.message }}
+    </div>
+    {% if vr.response %}
+    <div>
+        Ответ: {{ vr.response }}
+    </div>
+    {% endif %}
+    {% endfor %}
+{% endblock %}

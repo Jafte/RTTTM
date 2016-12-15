@@ -6,3 +6,7 @@ class ProfileForm(forms.Form):
     name = forms.CharField(label=_('Name'), max_length=100, required=False)
     about = forms.CharField(label=_('About'), widget=forms.Textarea, required=False)
     photo = forms.FileField(label=_('Photo'), required=False)
+
+
+class WantToReadForm(forms.Form):
+    message = forms.CharField(label=_('Message'), widget=forms.Textarea)

@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.http import Http404
-from .forms import ProfileForm
+from .forms import ProfileForm, WantToReadForm
+from .models import VoiceRequest
 
 
 class UserDetail(DetailView):
@@ -82,3 +83,76 @@ class UserEdit(LoginRequiredMixin, FormView):
 class UserList(ListView):
     queryset = User.objects.filter(is_active=True)
     template_name = 'user_profile/user_list.html'
+
+
+class VoiceRequestList(LoginRequiredMixin, ListView):
+    queryset = VoiceRequest.objects.all()
+    slug_url_kwarg = 'username'
+    template_name = 'user_profile/voice_request_list.html'
+    user = None
+
+    def dispatch(self, request, *args, **kwargs):
+        user = self.get_user()
+        if request.user != user:
+            raise Http404()
+
+        return super(VoiceRequestList, self).dispatch(request, *args, **kwargs)
+
+    def get_user(self):
+        if not self.user:
+            slug = self.kwargs.get(self.slug_url_kwarg)
+            self.user = get_object_or_404(User, username=slug)
+
+        return self.user
+
+    def get_queryset(self):
+        qs = super(VoiceRequestList, self).get_queryset()
+        user = self.get_user()
+
+        return qs.filter(user=user)
+
+    def get_context_data(self, **kwargs):
+        context = super(VoiceRequestList, self).get_context_data()
+        user = self.get_user()
+        context["user_data"] = user
+
+        return context
+
+
+class VoiceRequestCreate(LoginRequiredMixin, FormView):
+    slug_url_kwarg = 'username'
+    form_class = WantToReadForm
+    template_name = 'user_profile/voice_request_form.html'
+    user = None
+
+    def dispatch(self, request, *args, **kwargs):
+        user = self.get_user()
+        if request.user != user:
+            raise Http404()
+
+        return super(VoiceRequestCreate, self).dispatch(request, *args, **kwargs)
+
+    def get_user(self):
+        if not self.user:
+            slug = self.kwargs.get(self.slug_url_kwarg)
+            self.user = get_object_or_404(User, username=slug)
+
+        return self.user
+
+    def get_context_data(self, **kwargs):
+        context = super(VoiceRequestCreate, self).get_context_data()
+        user = self.get_user()
+        context["user_data"] = user
+
+        return context
+
+    def form_valid(self, form):
+        user = self.get_user()
+
+        voice_request = VoiceRequest()
+        voice_request.user = user
+        voice_request.message = form.cleaned_data["message"]
+        voice_request.save()
+
+        return redirect('user-voice-request-list', username=user.username)
+

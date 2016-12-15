@@ -22,15 +22,30 @@
     {% endif %}
 </div>
 {% if user_data == request.user %}
-    <ul class="uk-subnav uk-subnav uk-subnav-line uk-margin-top">
-        <li>
-            <a href="{% url 'user-profile-edit' username=user_data.username %}">редактировать</a>
-        </li>
-        <li>
-            <a href="{% url 'account_change_password' %}">сменить пароль</a>
-        </li>
-        <li>
-            <a href="{% url 'account_email' %}">управление e-mail</a>
-        </li>
-    </ul>
+    <div class="uk-button-group uk-margin-top uk-width-1-1">
+        <a
+                class="uk-button uk-width-1-3"
+                href="{% url 'user-profile-edit' username=user_data.username %}"
+        >редактировать</a>
+        <a
+                class="uk-button uk-width-1-3"
+                href="{% url 'account_change_password' %}"
+        >сменить пароль</a>
+        <a
+                class="uk-button uk-width-1-3"
+                href="{% url 'account_email' %}"
+        >управление e-mail</a>
+    </div>
+    <div class="uk-button-group uk-margin-top uk-width-1-1">
+        <a
+            href="{%  url 'user-voice-request-create' username=user_data.username %}"
+            class="uk-button {% if user_data.profile.has_voice_requests %}uk-width-1-2{% else %}uk-width-1-2{% endif %} uk-button-danger"
+        >хочу читать</a>
+        {% if user_data.profile.has_voice_requests %}
+        <a
+            href="{%  url 'user-voice-request-list' username=user_data.username %}"
+            class="uk-button uk-width-1-2 uk-button-success"
+        >мои запросы</a>
+        {% endif %}
+    </div>
 {% endif %}
