@@ -39,7 +39,7 @@
     <div class="uk-button-group uk-margin-top uk-width-1-1">
         <a
             href="{%  url 'user-voice-request-create' username=user_data.username %}"
-            class="uk-button {% if user_data.profile.has_voice_requests %}uk-width-1-2{% else %}uk-width-1-2{% endif %} uk-button-danger"
+            class="uk-button {% if user_data.profile.has_voice_requests %}uk-width-1-2{% else %}uk-width-1-1{% endif %} uk-button-danger"
         >хочу читать</a>
         {% if user_data.profile.has_voice_requests %}
         <a
