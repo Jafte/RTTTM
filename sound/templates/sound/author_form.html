@@ -11,14 +11,16 @@
         {% csrf_token %}
         {{ form|crispy }}
         <div class="uk-form-row">
-            <div class="uk-form-controls">
-                <button class="uk-button uk-button-success" type="submit">Отправить</button>
-            </div>
+            <a class="uk-button uk-button-danger" href="{{ author.get_absolute_url }}">Отменить</a>
+            <button class="uk-button uk-button-success" type="submit">Сохранить</button>
         </div>
     </form>
 {% endblock %}
 
 {% block sidebar %}
+<div class="uk-alert uk-alert-danger uk-alert-large uk-text-center">
+    <div class="uk-h3">Сейчас все выглядит вот так:</div>
+</div>
 <div class="uk-panel uk-panel-box">
     <div class="uk-text-center">
         <div class="uk-thumbnail uk-overlay-hover uk-border-circle uk-margin-bottom">

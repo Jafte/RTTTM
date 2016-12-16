@@ -34,7 +34,23 @@
                 <div class="uk-navbar-flip">
                     <ul class="uk-navbar-nav">
                         {% if user.is_authenticated %}
-                        <li><a href="{{ user.profile.get_absolute_url }}">{% user_display user %}</a></li>
+                        <li class="uk-parent" data-uk-dropdown>
+                            <a href="{{ user.profile.get_absolute_url }}">{% user_display user %} <i class="uk-icon-caret-down"></i></a>
+                            <div class="uk-dropdown uk-dropdown-navbar">
+                                <ul class="uk-nav uk-nav-navbar">
+                                    {% if  user.profile.is_voice_artist %}
+                                    <li class="uk-nav-header">Ваши "голоса"</li>
+                                    {% for voice in user.voices.all %}
+                                    <li><a href="{{ voice.get_absolute_url }}">{{ voice.name }}</a></li>
+                                    {% endfor %}
+                                    {% endif %}
+                                    <li class="uk-nav-header">Ваш профиль</li>
+                                    <li><a href="{% url 'user-profile-edit' username=user.username %}">редактировать</a></li>
+                                    <li><a href="{% url 'account_change_password' %}">сменить пароль</a></li>
+                                    <li><a href="{% url 'account_email' %}">управление e-mail</a></li>
+                                </ul>
+                            </div>
+                        </li>
                         <li><a href="{% url 'account_logout' %}">Выход</a></li>
                         {% else %}
                         <li><a href="{% url 'account_login' %}">Вход</a></li>

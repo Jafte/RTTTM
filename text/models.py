@@ -40,3 +40,9 @@ class Category(models.Model):
     text = models.ManyToManyField(to=Text, verbose_name=_('text'), related_name="categories")
     created = models.DateTimeField(verbose_name=_('created'), auto_now_add=True)
     modified = models.DateTimeField(verbose_name=_('modified'), auto_now=True)
+
+    def __str__(self):
+        return '%s' % self.name
+
+    def get_absolute_url(self):
+        return reverse('text-category', kwargs={'category_slug': self.slug})

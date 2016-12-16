@@ -7,12 +7,12 @@ from django.urls import reverse
 from text.models import Text
 
 STATUS_CHOICES = (
-    (0, _('Close')),
-    (1, _('New')),
+    (0, _('New')),
+    (1, _('In progress')),
     (2, _('Done')),
     (3, _('Double')),
     (4, _('Reject')),
-    (5, _('In progress')),
+    (9, _('Close')),
 )
 
 
@@ -29,7 +29,7 @@ class Author(models.Model):
         return reverse('sound-author-detail', kwargs={'pk': self.pk})
 
     def check_request_already_gated_in(self, request):
-        if ArtistRequest.objects.filter(voice=self, request=request, status__gte=1):
+        if ArtistRequest.objects.filter(voice=self, request=request, status__lte=1):
             return True
         return False
 
@@ -43,7 +43,7 @@ class Request(models.Model):
     status = models.PositiveSmallIntegerField(_('status'), choices=STATUS_CHOICES, blank=True)
     text = models.ForeignKey(to=Text, blank=True, null=True, related_name="requests")
     created = models.DateTimeField(verbose_name=_('created'), auto_now_add=True)
-    taken_by_users = models.ManyToManyField(to=User, through='ArtistRequest', related_name="taken_requests")
+    taken_by_voices = models.ManyToManyField(to=Author, through='ArtistRequest', related_name="taken_requests")
 
     class Meta:
         ordering = ['-created']
@@ -56,7 +56,6 @@ class Request(models.Model):
 
 
 class ArtistRequest(models.Model):
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     voice = models.ForeignKey(to=Author, on_delete=models.CASCADE)
     request = models.ForeignKey(to=Request, on_delete=models.CASCADE)
     created = models.DateTimeField(verbose_name=_('created'), auto_now_add=True)

@@ -42,12 +42,12 @@
             <b>Статус:</b> {{ request_object.get_status_display }}
         </div>
         {% if artist_requests %}
-        <h5>Приняли исполнителями:</h5>
+        <h5>Принимают участие:</h5>
             <div class="uk-row">
             {% for artist_request in artist_requests %}
                 <div class="uk-width-1-3">
                     {% include "sound/snippets/author_list_short.html" with author=artist_request.voice %}
-                    {% if artist_request.voice.user == user %}
+                    {% if artist_request.voice.user == user and request_object.status != %}
                         <a
                             class="uk-button uk-width-1-1 uk-button-danger uk-margin-top"
                             href="{% url "request-author-get-out" request_object.pk artist_request.pk %}"

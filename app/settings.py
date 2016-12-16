@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'django_cleanup',
     'crispy_forms',
+    'pure_pagination',
 
     'text',
     'sound',
@@ -163,6 +164,13 @@ CRISPY_TEMPLATE_PACK = "uikit"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'app/static'),
 ]
+
+PAGINATION_SETTINGS = {
+    'PAGE_RANGE_DISPLAYED': 10,
+    'MARGIN_PAGES_DISPLAYED': 2,
+
+    'SHOW_FIRST_PAGE_WHEN_INVALID': True,
+}
 
 try:
     from app.local_settings import *

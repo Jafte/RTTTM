@@ -19,6 +19,9 @@
             {% endfor %}
             </div>
         </div>
+        {% if is_paginated %}
+            {% include "_pagination.html" %}
+        {% endif %}
     </div>
 </div>
 {% endblock %}

@@ -4,12 +4,14 @@ from sound.models import Sound, Author, Request, ArtistRequest
 from sound.forms import RequestForm
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from pure_pagination.mixins import PaginationMixin
 
 
-class AuthorList(ListView):
+class AuthorList(PaginationMixin, ListView):
     model = Author
     template_name = "sound/author_list.html"
     context_object_name = "author_list"
+    paginate_by = 40
 
 
 class AuthorDetail(DetailView):
@@ -40,10 +42,11 @@ class AuthorUpdate(LoginRequiredMixin, UpdateView):
         return author.get_absolute_url()
 
 
-class SoundList(ListView):
+class SoundList(PaginationMixin, ListView):
     model = Sound
     template_name = "sound/sound_list.html"
     context_object_name = "sound_list"
+    paginate_by = 40
 
 
 class SoundDetail(DetailView):
@@ -52,10 +55,11 @@ class SoundDetail(DetailView):
     context_object_name = "sound"
 
 
-class RequestList(ListView):
+class RequestList(PaginationMixin, ListView):
     model = Request
     template_name = "sound/request_list.html"
     context_object_name = "request_list"
+    paginate_by = 40
 
 
 class RequestDetail(DetailView):
@@ -68,7 +72,7 @@ class RequestDetail(DetailView):
         request_object = self.get_object()
         user = self.request.user
 
-        artist_requests = ArtistRequest.objects.filter(request=request_object, status__gte=1)
+        artist_requests = ArtistRequest.objects.filter(request=request_object, status__lte=1)
         context["artist_requests"] = artist_requests
         if user.profile.is_voice_artist:
             user_artist_requests = artist_requests.filter(voice__in=user.voices.all())
@@ -91,7 +95,7 @@ class RequestGetIn(LoginRequiredMixin, RedirectView):
 
     def get_voice(self):
         if not self.voice:
-            self.voice = get_object_or_404(Author, pk=self.kwargs.get('pk'))
+            self.voice = get_object_or_404(Author, pk=self.kwargs.get('voice_pk'))
         return self.voice
 
     def dispatch(self, request, *args, **kwargs):
@@ -108,9 +112,8 @@ class RequestGetIn(LoginRequiredMixin, RedirectView):
         if not voice.check_request_already_gated_in(sound_request):
             ar = ArtistRequest()
             ar.voice = voice
-            ar.user = user
             ar.request = sound_request
-            ar.status = 1
+            ar.status = 0
             ar.save()
 
         return sound_request.get_absolute_url()
@@ -127,7 +130,7 @@ class RequestGetOut(LoginRequiredMixin, RedirectView):
 
     def get_voice_sound_request(self):
         if not self.voice_sound_request:
-            self.voice_sound_request = get_object_or_404(ArtistRequest, pk=self.kwargs.get('pk'))
+            self.voice_sound_request = get_object_or_404(ArtistRequest, pk=self.kwargs.get('voice_pk'), status__lte=1)
         return self.voice_sound_request
 
     def dispatch(self, request, *args, **kwargs):
@@ -139,7 +142,7 @@ class RequestGetOut(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         sound_request = self.get_sound_request()
         voice_sound_request = self.get_voice_sound_request()
-        voice_sound_request.status = 0
+        voice_sound_request.status = 9
         voice_sound_request.save()
 
         return sound_request.get_absolute_url()
@@ -153,6 +156,6 @@ class RequestCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         user = self.request.user
         form.instance.user = user
-        form.instance.status = 1
+        form.instance.status = 0
 
         return super(RequestCreate, self).form_valid(form)
