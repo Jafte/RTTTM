@@ -50,9 +50,8 @@ class CategoryTextList(PaginationMixin, ListView):
         return self.category
 
     def get_queryset(self):
-        qs = super(CategoryTextList, self).get_queryset()
         category = self.get_category()
-        return qs.filter(category=category)
+        return category.texts.all()
 
     def get_context_data(self, **kwargs):
         context = super(CategoryTextList, self).get_context_data(**kwargs)
