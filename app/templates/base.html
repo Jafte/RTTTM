@@ -1,7 +1,7 @@
 <!DOCTYPE html>{% load static account %}
 <html>
     <head>
-        <title>{% block title %}Самая главная страница на сайте{% endblock %} :: Почитаешь мне?</title>
+        <title>{% block title %}Авторские прочтения и озвучка всего на свете{% endblock %} :: Почитаешь мне?</title>
         <link rel="stylesheet" href="{% static 'uikit/css/uikit.min.css' %}" />
         <link rel="stylesheet" href="{% static 'app/css/style.css' %}" />
         <script type="text/javascript" async src="https://relap.io/api/v6/head.js?token=8mIbmY4KHuMe7uvu"></script>
@@ -21,13 +21,13 @@
                 </a>
                 <ul class="uk-navbar-nav navbar-after-brand">
                     <li{% block li_sound_list %}{% endblock %}>
-                        <a href="{% url 'sound-list' %}">Послушать других</a>
+                        <a href="{% url 'sound-list' %}">Послушать</a>
                     </li>
                     <li{% block li_request_list %}{% endblock %}>
-                        <a href="{% url 'request-list' %}">Почитать самому</a>
+                        <a href="{% url 'request-list' %}">Запросы на озвучку</a>
                     </li>
                     <li{% block li_request_create %}{% endblock %}>
-                        <a href="{% url 'request-create' %}">Попросить, чтобы тебе почитали</a>
+                        <a href="{% url 'request-create' %}">Оставить запрос</a>
                     </li>
                 </ul>
 
@@ -54,10 +54,10 @@
                         <h3>Можно посмотреть</h3>
                         <hr class="border-top border-color-main">
                         <ul class="uk-nav">
-                            <li><a href="{% url 'how' %}">Как это работает?</a></li>
-                            <li><a href="{% url 'sound-author-list' %}">Люди, которые читают</a></li>
-                            <li><a href="{% url 'text-author-list' %}">Люди, которые пишут</a></li>
-                            <li><a href="{% url 'text-list' %}">Коллекция прочитанных произведений</a></li>
+                            <li><a href="{% url 'how' %}">О проекте</a></li>
+                            <li><a href="{% url 'sound-author-list' %}">Люди и их голоса</a></li>
+                            <li><a href="{% url 'text-author-list' %}">Люди и их тексты</a></li>
+                            <li><a href="{% url 'text-list' %}">Коллекция прочитанного</a></li>
                         </ul>
                     </div>
                     <div class="uk-width-1-2">

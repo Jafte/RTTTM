@@ -1,7 +1,9 @@
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, FormView, RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from sound.models import Sound, Author, Request
+from sound.models import Sound, Author, Request, ArtistRequest
 from sound.forms import RequestForm
+from django.http import Http404
+from django.shortcuts import get_object_or_404
 
 
 class AuthorList(ListView):
@@ -14,6 +16,28 @@ class AuthorDetail(DetailView):
     model = Author
     template_name = "sound/author_detail.html"
     context_object_name = "author"
+
+
+class AuthorUpdate(LoginRequiredMixin, UpdateView):
+    model = Author
+    template_name = "sound/author_form.html"
+    fields = ["name", "about", "photo"]
+
+    def dispatch(self, request, *args, **kwargs):
+        author = self.get_object()
+        if request.user != author.user:
+            raise Http404()
+        return super(AuthorUpdate, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(AuthorUpdate, self).get_context_data(**kwargs)
+        context["author"] = self.get_object()
+
+        return context
+
+    def get_success_url(self):
+        author = self.get_object()
+        return author.get_absolute_url()
 
 
 class SoundList(ListView):
@@ -38,6 +62,87 @@ class RequestDetail(DetailView):
     model = Request
     template_name = "sound/request_detail.html"
     context_object_name = "request_object"
+
+    def get_context_data(self, **kwargs):
+        context = super(RequestDetail, self).get_context_data(**kwargs)
+        request_object = self.get_object()
+        user = self.request.user
+
+        artist_requests = ArtistRequest.objects.filter(request=request_object, status__gte=1)
+        context["artist_requests"] = artist_requests
+        if user.profile.is_voice_artist:
+            user_artist_requests = artist_requests.filter(voice__in=user.voices.all())
+            user_voices_in = []
+            for ar in user_artist_requests:
+                user_voices_in.append(ar.voice)
+            context["user_voices_in"] = user_voices_in
+
+        return context
+
+
+class RequestGetIn(LoginRequiredMixin, RedirectView):
+    sound_request = False
+    voice = False
+
+    def get_sound_request(self):
+        if not self.sound_request:
+            self.sound_request = get_object_or_404(Request, pk=self.kwargs.get('request_pk'))
+        return self.sound_request
+
+    def get_voice(self):
+        if not self.voice:
+            self.voice = get_object_or_404(Author, pk=self.kwargs.get('pk'))
+        return self.voice
+
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+        if not user.profile.is_voice_artist:
+            raise Http404()
+        return super(RequestGetIn, self).dispatch(request, *args, **kwargs)
+
+    def get_redirect_url(self, *args, **kwargs):
+        sound_request = self.get_sound_request()
+        voice = self.get_voice()
+        user = self.request.user
+
+        if not voice.check_request_already_gated_in(sound_request):
+            ar = ArtistRequest()
+            ar.voice = voice
+            ar.user = user
+            ar.request = sound_request
+            ar.status = 1
+            ar.save()
+
+        return sound_request.get_absolute_url()
+
+
+class RequestGetOut(LoginRequiredMixin, RedirectView):
+    sound_request = False
+    voice_sound_request = False
+
+    def get_sound_request(self):
+        if not self.sound_request:
+            self.sound_request = get_object_or_404(Request, pk=self.kwargs.get('request_pk'))
+        return self.sound_request
+
+    def get_voice_sound_request(self):
+        if not self.voice_sound_request:
+            self.voice_sound_request = get_object_or_404(ArtistRequest, pk=self.kwargs.get('pk'))
+        return self.voice_sound_request
+
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+        if not user.profile.is_voice_artist:
+            raise Http404()
+        return super(RequestGetOut, self).dispatch(request, *args, **kwargs)
+
+    def get_redirect_url(self, *args, **kwargs):
+        sound_request = self.get_sound_request()
+        voice_sound_request = self.get_voice_sound_request()
+        voice_sound_request.status = 0
+        voice_sound_request.save()
+
+        return sound_request.get_absolute_url()
 
 
 class RequestCreate(LoginRequiredMixin, CreateView):

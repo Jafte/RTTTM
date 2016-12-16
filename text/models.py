@@ -22,6 +22,7 @@ class Text(models.Model):
     url_to_source = models.CharField(verbose_name=_('url to source'), blank=True, max_length=200)
     text = models.TextField(verbose_name=_('text'))
     author = models.ForeignKey(to=Author, verbose_name=_('author'), related_name="texts")
+    category = models.ManyToManyField(to="Category", verbose_name=_('category'), related_name="texts")
     created = models.DateTimeField(verbose_name=_('created'), auto_now_add=True)
     modified = models.DateTimeField(verbose_name=_('modified'), auto_now=True)
 
@@ -30,3 +31,12 @@ class Text(models.Model):
 
     def get_absolute_url(self):
         return reverse('text-detail', kwargs={'pk': self.pk})
+
+
+class Category(models.Model):
+    slug = models.SlugField()
+    name = models.CharField(verbose_name=_('name'), max_length=200)
+    description = models.TextField(verbose_name=_('description'), blank=True)
+    text = models.ManyToManyField(to=Text, verbose_name=_('text'), related_name="categories")
+    created = models.DateTimeField(verbose_name=_('created'), auto_now_add=True)
+    modified = models.DateTimeField(verbose_name=_('modified'), auto_now=True)

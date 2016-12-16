@@ -38,19 +38,32 @@
 
 {% block sidebar %}
     <div class="uk-panel uk-panel-box">
-        <p>
-            <b>Статус:</b>
-            {{ request_object.get_status_display }}
-        </p>
-        <p>
-            <b>Принят исполнителями:</b>
-            <ul>
-            {% for taken_by_user in request_object.taken_by_users.all %}
-                <li>{% user_display request_object.user %}</li>
-            {% empty %}
-                <li>никто еще не брался :(</li>
+        <div class="status">
+            <b>Статус:</b> {{ request_object.get_status_display }}
+        </div>
+        {% if artist_requests %}
+        <h5>Приняли исполнителями:</h5>
+            <div class="uk-row">
+            {% for artist_request in artist_requests %}
+                <div class="uk-width-1-3">
+                    {% include "sound/snippets/author_list_short.html" with author=artist_request.voice %}
+                    {% if artist_request.voice.user == user %}
+                        <a
+                            class="uk-button uk-width-1-1 uk-button-danger uk-margin-top"
+                            href="{% url "request-author-get-out" request_object.pk artist_request.pk %}"
+                        >отказаться</a>
+                    {% endif %}
+                </div>
             {% endfor %}
-            </ul>
-        </p>
+            </div>
+        {% endif %}
     </div>
+    {% for voice in user.voices.all %}
+        {% if voice not in user_voices_in %}
+        <a
+                class="uk-button uk-width-1-1 uk-button-primary uk-margin-top"
+                href="{% url "request-author-get-in" request_object.pk voice.pk %}"
+        >принять участие {{ voice.name }}</a>
+        {% endif %}
+    {% endfor %}
 {% endblock %}

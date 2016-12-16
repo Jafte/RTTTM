@@ -7,6 +7,7 @@ from django.urls import reverse
 from text.models import Text
 
 STATUS_CHOICES = (
+    (0, _('Close')),
     (1, _('New')),
     (2, _('Done')),
     (3, _('Double')),
@@ -26,6 +27,11 @@ class Author(models.Model):
 
     def get_absolute_url(self):
         return reverse('sound-author-detail', kwargs={'pk': self.pk})
+
+    def check_request_already_gated_in(self, request):
+        if ArtistRequest.objects.filter(voice=self, request=request, status__gte=1):
+            return True
+        return False
 
 
 class Request(models.Model):
@@ -51,6 +57,7 @@ class Request(models.Model):
 
 class ArtistRequest(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    voice = models.ForeignKey(to=Author, on_delete=models.CASCADE)
     request = models.ForeignKey(to=Request, on_delete=models.CASCADE)
     created = models.DateTimeField(verbose_name=_('created'), auto_now_add=True)
     status = models.PositiveSmallIntegerField(_('status'), choices=STATUS_CHOICES, blank=True)
@@ -59,7 +66,7 @@ class ArtistRequest(models.Model):
         ordering = ['-created']
 
     def __str__(self):
-        return '%s request taken by %s' % (self.title.request, self.user)
+        return '%s request taken by %s' % (self.request.title, self.user)
 
     def get_absolute_url(self):
         return reverse('request-detail', kwargs={'pk': self.request.pk})

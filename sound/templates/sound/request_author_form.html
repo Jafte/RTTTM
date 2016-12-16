@@ -1,0 +1,21 @@
+{% extends 'sound/base.html' %}
+
+{% load thumbnail crispy_forms_tags %}
+
+{% block title %}{{ request_object.title }} : Принять участие{% endblock %}
+
+{% block content %}
+    <h1>{{ request_object.title }}</h1>
+    <hr class="border-top border-color-main">
+    <form class="uk-form uk-form-horizontal" id="signup_form"  method="post" action="{% url "request-author-get-in" request_object.pk %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="uk-form-row">
+            <a href="{{ request_object.get_absolute_url }}" class="uk-button uk-button-danger">вернуться к заявке</a>
+            <button class="uk-button uk-button-success" type="submit">Отправить</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}

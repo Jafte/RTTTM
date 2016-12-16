@@ -1,5 +1,5 @@
 from django.forms import ModelForm, TextInput, Textarea
-from sound.models import Request
+from sound.models import Request, ArtistRequest
 
 
 class RequestForm(ModelForm):
@@ -18,3 +18,10 @@ class RequestForm(ModelForm):
             'url_to_source': 'Ссылка на оригинал',
             'text_source': 'Оригинал',
         }
+
+
+class ArtistRequestForm(ModelForm):
+    class Meta:
+        model = ArtistRequest
+        fields = ["voice"]
+
