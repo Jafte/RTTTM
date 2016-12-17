@@ -9,6 +9,7 @@
 {% block content %}
     <article class="uk-article">
         <h1 class="uk-article-title">{{ request_object.title }}</h1>
+        <hr class="border-top border-color-main">
         <p class="uk-article-meta">
             запрос поступил от пользователя
             <a href="{{ request_object.user.profile.get_absolute_url }}">
@@ -16,38 +17,41 @@
             </a>
             {{ request_object.created }}
         </p>
-
         {% if request_object.description %}
-        <hr class="uk-article-divider">
         <p>{{ request_object.description|linebreaks }}</p>
         {% endif %}
-
-        {% if request_object.url_to_source %}
         <hr class="uk-article-divider">
+        {% if request_object.url_to_source %}
         <p><b>Ссылка на оригинал:</b> {{ request_object.url_to_source }}</p>
         {% endif %}
 
         {% if request_object.text_source %}
-        <hr class="uk-article-divider">
-        <h3>Оригинал</h3>
+        <h3>Оригинальный текст</h3>
         <p>{{ request_object.text_source|linebreaks }}</p>
         {% endif %}
-
     </article>
 {% endblock %}
 
 {% block sidebar %}
+    {% for voice in user.voices.all %}
+        {% if voice not in user_voices_in %}
+        <a
+                class="uk-button uk-width-1-1 uk-button-success uk-margin-bottom"
+                href="{% url "request-author-get-in" request_object.pk voice.pk %}"
+        >принять участие как "{{ voice.name }}"</a>
+        {% endif %}
+    {% endfor %}
     <div class="uk-panel uk-panel-box">
         <div class="status">
             <b>Статус:</b> {{ request_object.get_status_display }}
         </div>
         {% if artist_requests %}
-        <h5>Принимают участие:</h5>
-            <div class="uk-row">
+        <h3>Принимают участие:</h3>
+            <div class="uk-grid">
             {% for artist_request in artist_requests %}
                 <div class="uk-width-1-3">
                     {% include "sound/snippets/author_list_short.html" with author=artist_request.voice %}
-                    {% if artist_request.voice.user == user and request_object.status != %}
+                    {% if artist_request.voice.user == user and request_object.status <= 1 %}
                         <a
                             class="uk-button uk-width-1-1 uk-button-danger uk-margin-top"
                             href="{% url "request-author-get-out" request_object.pk artist_request.pk %}"
@@ -58,12 +62,4 @@
             </div>
         {% endif %}
     </div>
-    {% for voice in user.voices.all %}
-        {% if voice not in user_voices_in %}
-        <a
-                class="uk-button uk-width-1-1 uk-button-primary uk-margin-top"
-                href="{% url "request-author-get-in" request_object.pk voice.pk %}"
-        >принять участие {{ voice.name }}</a>
-        {% endif %}
-    {% endfor %}
 {% endblock %}
